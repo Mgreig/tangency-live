@@ -3,19 +3,46 @@
 // 1) Sends welcome email via Resend
 // 2) Logs signup to Google Sheet via Apps Script webhook
 
+const ALLOWED_ORIGINS = [
+  'https://tangency.ai',
+  'https://www.tangency.ai',
+  'https://staging.tangency-live.pages.dev',
+];
+
+function getCorsOrigin(request) {
+  const origin = request.headers.get('Origin') || '';
+  // Allow Cloudflare Pages preview deploys (*.tangency-live.pages.dev)
+  if (ALLOWED_ORIGINS.includes(origin) ||
+      /^https:\/\/[a-z0-9-]+\.tangency-live\.pages\.dev$/.test(origin)) {
+    return origin;
+  }
+  return 'https://tangency.ai'; // default — browser will block mismatched origins
+}
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
 export async function onRequestPost(context) {
+  const corsOrigin = getCorsOrigin(context.request);
   const headers = {
     'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Origin': corsOrigin,
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type',
+    'Vary': 'Origin',
   };
 
   try {
     const body = await context.request.json();
     const email = (body.email || '').trim().toLowerCase();
 
-    if (!email || !email.includes('@') || !email.includes('.')) {
+    if (!email || !EMAIL_RE.test(email)) {
+      return new Response(JSON.stringify({ error: 'Invalid email address' }), {
+        status: 400, headers,
+      });
+    }
+
+    // Block disposable/junk patterns
+    if (email.length > 254 || email.split('@')[0].length > 64) {
       return new Response(JSON.stringify({ error: 'Invalid email address' }), {
         status: 400, headers,
       });
@@ -72,13 +99,15 @@ export async function onRequestPost(context) {
   }
 }
 
-export async function onRequestOptions() {
+export async function onRequestOptions(context) {
+  const corsOrigin = getCorsOrigin(context.request);
   return new Response(null, {
     status: 204,
     headers: {
-      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Origin': corsOrigin,
       'Access-Control-Allow-Methods': 'POST, OPTIONS',
       'Access-Control-Allow-Headers': 'Content-Type',
+      'Vary': 'Origin',
     },
   });
 }
