@@ -58,9 +58,16 @@ export async function onRequestPost(context) {
       );
     }
 
-    await Promise.allSettled(promises);
+    const results = await Promise.allSettled(promises);
 
-    return new Response(JSON.stringify({ success: true }), {
+    return new Response(JSON.stringify({
+      success: true,
+      debug: {
+        hasResendKey: !!RESEND_API_KEY,
+        hasSheetWebhook: !!SHEET_WEBHOOK,
+        results: results.map(r => r.status === 'fulfilled' ? r.value : r.reason?.message),
+      }
+    }), {
       status: 200, headers,
     });
 
