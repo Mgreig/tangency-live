@@ -76,10 +76,10 @@ a{text-decoration:none;color:inherit}
 /* ================================================================
    2. HERO SECTION
    ================================================================ */
-.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;overflow:hidden;padding-top:64px;z-index:1}
+.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;overflow:hidden;padding-top:64px;z-index:2;background:var(--bg)}
 #constellation-canvas{position:absolute;inset:0;z-index:0}
 #arc-canvas{position:absolute;inset:0;z-index:0;pointer-events:none}
-.starfield-wrap{position:relative}
+.starfield-wrap{position:relative;z-index:2;background:var(--bg)}
 .starfield-bg{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
 .starfield-bg canvas{width:100%;height:100%}
 .starfield-wrap>section{position:relative;z-index:1}
@@ -155,7 +155,7 @@ a{text-decoration:none;color:inherit}
 /* ================================================================
    2b. NARRATIVE BLOCK — Problem → Noise → Confluence
    ================================================================ */
-.narrative-block{padding:0;overflow:hidden;position:relative;z-index:1}
+.narrative-block{padding:0;overflow:hidden;position:relative;z-index:2;background:var(--bg)}
 .narrative-beat{min-height:80vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:clamp(4rem,10vw,8rem) 1.5rem;position:relative;z-index:1}
 .narrative-beat .beat-label{font-family:var(--font-mono);font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-muted);margin-bottom:2rem}
 .narrative-beat .beat-label.blue{color:var(--blue)}
@@ -217,7 +217,7 @@ a{text-decoration:none;color:inherit}
 /* ================================================================
    4. INTERACTIVE DEMO SECTION
    ================================================================ */
-.demo-section{padding:clamp(4rem,8vw,8rem) 0}
+.demo-section{padding:clamp(4rem,8vw,8rem) 0;background:var(--bg);position:relative;z-index:2}
 .demo-grid{display:grid;grid-template-columns:1fr 1.25fr;gap:3rem;align-items:start}
 .demo-text{padding-top:2rem}
 .demo-badge{display:inline-flex;align-items:center;gap:0.5rem;font-size:0.75rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--emerald);margin-bottom:1.25rem}
@@ -289,7 +289,7 @@ a{text-decoration:none;color:inherit}
 /* ================================================================
    5. FEATURE SHOWCASE — TABS
    ================================================================ */
-.features-section{padding:clamp(4rem,8vw,8rem) 0}
+.features-section{padding:clamp(4rem,8vw,8rem) 0;background:var(--bg);position:relative;z-index:2}
 .section-header{text-align:center;margin-bottom:3rem}
 .section-header h2{font-family:var(--font-display);font-weight:700;font-size:clamp(2rem,4vw,3rem);margin-bottom:0.75rem}
 .section-header p{color:var(--text-secondary);max-width:560px;margin:0 auto;font-size:1rem}
@@ -496,8 +496,9 @@ a{text-decoration:none;color:inherit}
 /* ================================================================
    6. SCORING METHODOLOGY
    ================================================================ */
-.methodology-section{padding:clamp(4rem,8vw,8rem) 0;background:#0D1525;position:relative;overflow:visible}
+.methodology-section{padding:clamp(4rem,8vw,8rem) 0;background:transparent;position:relative;overflow:visible;z-index:1}
 #strand-canvas{position:fixed;top:0;left:0;right:0;height:100vh;z-index:0;pointer-events:none;opacity:0.24;display:none}
+.methodology-section~*{position:relative;z-index:2;background:var(--bg)}
 .methodology-section>.container{position:relative;z-index:1}
 .method-layers{max-width:900px;margin:0 auto;display:flex;flex-direction:column;gap:2.5rem;position:relative}
 .method-layer{position:relative}
