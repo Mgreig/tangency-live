@@ -77,7 +77,7 @@ a{text-decoration:none;color:inherit}
    2. HERO SECTION
    ================================================================ */
 .hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;overflow:hidden;padding-top:64px;z-index:1;background:transparent}
-#constellation-canvas{position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:3;pointer-events:none}
+#constellation-canvas{position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:0;pointer-events:none}
 #arc-canvas{position:absolute;inset:0;z-index:0;pointer-events:none}
 .starfield-wrap{position:relative;z-index:2;background:transparent}
 .starfield-bg{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
@@ -910,8 +910,8 @@ a{text-decoration:none;color:inherit}
 <!-- ============================================================
      2. HERO SECTION
      ============================================================ -->
-<canvas id="constellation-canvas" aria-hidden="true"></canvas>
 <div class="starfield-wrap">
+<canvas id="constellation-canvas" aria-hidden="true"></canvas>
 <section class="hero" id="hero">
 <canvas id="arc-canvas"></canvas>
   <div class="hero-gradient" aria-hidden="true"></div>
@@ -1651,7 +1651,7 @@ window.addEventListener('resize', () => {
   function resizeStrand() {
     const parent = sCanvas.parentElement;
     sW = parent ? parent.offsetWidth : window.innerWidth;
-    sH = parent ? parent.offsetHeight : window.innerHeight;
+    sH = parent ? Math.max(parent.offsetHeight, parent.scrollHeight) : window.innerHeight;
     sCanvas.width = sW * sDPR;
     sCanvas.height = sH * sDPR;
     sCanvas.style.width = sW + 'px';
@@ -1713,6 +1713,7 @@ window.addEventListener('resize', () => {
   const strandObs = new IntersectionObserver(entries => {
     strandVisible = entries[0].isIntersecting;
     sCanvas.style.display = strandVisible ? 'block' : 'none';
+    if (strandVisible) resizeStrand(); // re-measure when section becomes visible
   }, { threshold: 0.01 });
   strandObs.observe(sCanvas.parentElement);
 
@@ -1725,10 +1726,12 @@ window.addEventListener('resize', () => {
     lastFrame = t - (elapsed % FRAME_INT);
     sCtx.clearRect(0, 0, sW, sH);
 
-    // Fixed-position canvas: draw braid at vertical center of viewport
-    // Parallax depth comes from the canvas being position:fixed while content scrolls
-    // Offset slightly below center for visual balance
-    const braidY = sH * 0.55;
+    // Canvas is position:absolute within methodology section.
+    // Compute where the viewport center falls within the section.
+    const methRect = sCanvas.parentElement.getBoundingClientRect();
+    const viewH = window.innerHeight;
+    const viewCenterInSection = (viewH * 0.55) - methRect.top;
+    const braidY = Math.max(viewH * 0.3, Math.min(sH - viewH * 0.3, viewCenterInSection));
 
     const sway1 = Math.sin(t * SWAY_SPEED) * SWAY_AMP;
     const sway2 = Math.sin(t * SWAY_SPEED2 + 1.2) * SWAY_AMP * 0.5;
