@@ -3986,22 +3986,34 @@ function setupEmailForm(formId, successId) {
   if (!form || !success) return;
   form.addEventListener('submit', function(e) {
     e.preventDefault();
-    const email = form.querySelector('input[type="email"]').value;
+    const email = form.querySelector('input[type="email"]').value.trim();
+    if (!email) return;
     const btn = form.querySelector('button');
     btn.disabled = true;
     btn.textContent = 'Submitting...';
-    // Simulate submission (replace with real endpoint)
-    setTimeout(() => {
+    fetch('/api/signup', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email, source: 'landing' })
+    })
+    .then(function(r) {
+      if (!r.ok) throw new Error('Request failed');
+      return r.json();
+    })
+    .then(function() {
       form.style.display = 'none';
       success.style.display = 'block';
-      // Hide founding member line if present
-      const founding = form.parentElement.querySelector('.founding-line');
+      var founding = form.parentElement.querySelector('.founding-line');
       if (founding) founding.style.display = 'none';
-      const fine = form.parentElement.querySelector('.hero-email-fine');
+      var fine = form.parentElement.querySelector('.hero-email-fine');
       if (fine) fine.style.display = 'none';
-    }, 800);
+    })
+    .catch(function() {
+      btn.disabled = false;
+      btn.textContent = 'Request Access';
+      alert('Something went wrong. Please try again.');
+    });
   });
-  // Keyboard accessible — Enter submits
   form.querySelector('input').addEventListener('keydown', function(e) {
     if (e.key === 'Enter') form.requestSubmit();
   });
