@@ -497,7 +497,7 @@ a{text-decoration:none;color:inherit}
    6. SCORING METHODOLOGY
    ================================================================ */
 .methodology-section{padding:clamp(4rem,8vw,8rem) 0;background:#0D1525;position:relative;overflow:visible}
-#strand-canvas{position:absolute;inset:0;z-index:0;pointer-events:none;opacity:0.24}
+#strand-canvas{position:fixed;top:0;left:0;right:0;height:100vh;z-index:0;pointer-events:none;opacity:0.24;display:none}
 .methodology-section>.container{position:relative;z-index:1}
 .method-layers{max-width:900px;margin:0 auto;display:flex;flex-direction:column;gap:2.5rem;position:relative}
 .method-layer{position:relative}
@@ -1636,9 +1636,8 @@ window.addEventListener('resize', () => {
   const sDPR = window.devicePixelRatio || 1;
 
   function resizeStrand() {
-    const sect = sCanvas.parentElement;
-    sW = sect.offsetWidth;
-    sH = sect.offsetHeight;
+    sW = window.innerWidth;
+    sH = window.innerHeight;
     sCanvas.width = sW * sDPR;
     sCanvas.height = sH * sDPR;
     sCanvas.style.width = sW + 'px';
@@ -1710,16 +1709,18 @@ window.addEventListener('resize', () => {
     lastFrame = t - (elapsed % FRAME_INT);
     sCtx.clearRect(0, 0, sW, sH);
 
-    // Parallax: braid Y position tracks the viewport center relative to section
-    // This makes the braid appear to float at a depth between foreground and background
+    // Fixed-position canvas: draw braid at vertical center of viewport
+    // Parallax depth comes from the canvas being position:fixed while content scrolls
+    // Offset slightly below center for visual balance
+    const braidY = sH * 0.55;
+
+    // Show/hide based on methodology section visibility
     const sect = sCanvas.parentElement;
     const rect = sect.getBoundingClientRect();
     const viewH = window.innerHeight;
-    // viewCenter relative to section top (in section coords)
-    const viewCenterInSection = -rect.top + viewH * 0.5;
-    // Braid follows viewport center at 0.92x rate — subtle parallax lag while staying visible
-    // Offset pushes braid to lower-center of viewport
-    const parallaxY = viewCenterInSection * 0.92 + viewH * 0.05;
+    const sectionVisible = rect.top < viewH && rect.bottom > 0;
+    sCanvas.style.display = sectionVisible ? 'block' : 'none';
+    if (!sectionVisible) return;
 
     const sway1 = Math.sin(t * SWAY_SPEED) * SWAY_AMP;
     const sway2 = Math.sin(t * SWAY_SPEED2 + 1.2) * SWAY_AMP * 0.5;
@@ -1735,8 +1736,8 @@ window.addEventListener('resize', () => {
       for (let i = 0; i <= steps; i++) {
         const p = i / steps;
         const spineX = -sW * 0.15 + p * sW * 1.3;
-        // Spine Y: nearly horizontal braid, positioned by parallax
-        const spineY = p * sH * 0.06 + parallaxY;
+        // Spine Y: nearly horizontal braid, fixed at viewport center
+        const spineY = p * sH * 0.06 + braidY;
         const swayFactor = (p - 0.5) * 2;
         const ropeY = swayFactor * (sway1 + sway2);
         const nDrift = fbmNoise(
