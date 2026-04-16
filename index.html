@@ -496,9 +496,9 @@ a{text-decoration:none;color:inherit}
 /* ================================================================
    6. SCORING METHODOLOGY
    ================================================================ */
-.methodology-section{padding:clamp(4rem,8vw,8rem) 0;background:transparent;position:relative;overflow:visible;z-index:4}
+.methodology-section{padding:clamp(4rem,8vw,8rem) 0;background:transparent;position:relative;overflow:hidden;z-index:4}
 .methodology-section::before{content:'';position:absolute;inset:0;background:#0D1525;z-index:1}
-#strand-canvas{position:fixed;top:0;left:0;right:0;height:100vh;z-index:2;pointer-events:none;opacity:0.24;display:none}
+#strand-canvas{position:absolute;top:0;left:0;width:100%;height:100%;z-index:2;pointer-events:none;opacity:0.24;display:none}
 .methodology-section~*{position:relative;z-index:4;background:var(--bg)}
 .methodology-section>.container{position:relative;z-index:3}
 .method-layers{max-width:900px;margin:0 auto;display:flex;flex-direction:column;gap:2.5rem;position:relative}
@@ -1649,8 +1649,9 @@ window.addEventListener('resize', () => {
   const sDPR = window.devicePixelRatio || 1;
 
   function resizeStrand() {
-    sW = window.innerWidth;
-    sH = window.innerHeight;
+    const parent = sCanvas.parentElement;
+    sW = parent ? parent.offsetWidth : window.innerWidth;
+    sH = parent ? parent.offsetHeight : window.innerHeight;
     sCanvas.width = sW * sDPR;
     sCanvas.height = sH * sDPR;
     sCanvas.style.width = sW + 'px';
