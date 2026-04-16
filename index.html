@@ -1693,11 +1693,13 @@ window.addEventListener('resize', () => {
   let lastFrame = 0;
   const FRAME_INT = 1000 / 20;
 
-  // Check if section is in viewport
+  // Show/hide braid based on methodology section visibility
+  // This runs via IntersectionObserver, NOT inside rAF, so it always toggles correctly
   let strandVisible = false;
   const strandObs = new IntersectionObserver(entries => {
     strandVisible = entries[0].isIntersecting;
-  }, { threshold: 0.05 });
+    sCanvas.style.display = strandVisible ? 'block' : 'none';
+  }, { threshold: 0.01 });
   strandObs.observe(sCanvas.parentElement);
 
   function drawStrands(t) {
@@ -1713,14 +1715,6 @@ window.addEventListener('resize', () => {
     // Parallax depth comes from the canvas being position:fixed while content scrolls
     // Offset slightly below center for visual balance
     const braidY = sH * 0.55;
-
-    // Show/hide based on methodology section visibility
-    const sect = sCanvas.parentElement;
-    const rect = sect.getBoundingClientRect();
-    const viewH = window.innerHeight;
-    const sectionVisible = rect.top < viewH && rect.bottom > 0;
-    sCanvas.style.display = sectionVisible ? 'block' : 'none';
-    if (!sectionVisible) return;
 
     const sway1 = Math.sin(t * SWAY_SPEED) * SWAY_AMP;
     const sway2 = Math.sin(t * SWAY_SPEED2 + 1.2) * SWAY_AMP * 0.5;
