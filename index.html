@@ -497,6 +497,7 @@ a{text-decoration:none;color:inherit}
    6. SCORING METHODOLOGY
    ================================================================ */
 .methodology-section{padding:clamp(4rem,8vw,8rem) 0;background:transparent;position:relative;overflow:visible;z-index:1}
+.methodology-section::before{content:'';position:absolute;inset:0;background:#0D1525;z-index:-1}
 #strand-canvas{position:fixed;top:0;left:0;right:0;height:100vh;z-index:0;pointer-events:none;opacity:0.24;display:none}
 .methodology-section~*{position:relative;z-index:2;background:var(--bg)}
 .methodology-section>.container{position:relative;z-index:1}
