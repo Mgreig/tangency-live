@@ -709,7 +709,7 @@ a{text-decoration:none;color:inherit}
 .method-pill .pill-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
 .method-pill .pill-weight{color:var(--text-muted);margin-left:0.25rem}
 
-/* Live Scoring Example — Stacked Bar (SIGNATURE ELEMENT) */
+/* Score Breakdown — Merged Card */
 .live-score-header{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:1rem}
 .live-ticker-badge{font-family:var(--font-mono);font-weight:700;padding:0.25rem 0.75rem;background:rgba(16,185,129,0.15);color:var(--emerald);border-radius:9999px;font-size:0.875rem}
 .live-score-big{font-family:var(--font-mono);font-weight:700;font-size:2rem}
@@ -721,17 +721,16 @@ a{text-decoration:none;color:inherit}
 .odo-static{display:inline-block;line-height:1}
 .live-score-label{font-size:0.75rem;color:var(--text-muted)}
 
-.stacked-bar-container{margin-bottom:1rem}
-.stacked-bar{display:flex;height:40px;border-radius:var(--radius-md);overflow:hidden;gap:2px;width:100%}
-.stacked-seg{display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:0.5625rem;font-weight:700;color:#fff;min-width:0;position:relative;cursor:default;transition:flex 3s cubic-bezier(0.16,1,0.3,1)}
-.stacked-seg:hover{filter:brightness(1.15)}
-.stacked-seg .seg-tooltip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);padding:0.25rem 0.5rem;font-size:0.625rem;white-space:nowrap;z-index:10}
-.stacked-seg:hover .seg-tooltip{display:block}
+.score-split{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center}
+@media(max-width:768px){.score-split{grid-template-columns:1fr;gap:1.5rem}}
 
-.stacked-legend{display:flex;gap:0.75rem;flex-wrap:wrap;margin-top:0.75rem}
-.stacked-legend-item{display:flex;align-items:center;gap:0.375rem;font-family:var(--font-mono);font-size:0.6875rem;color:var(--text-secondary)}
-.stacked-legend-item .leg-color{width:10px;height:10px;border-radius:2px;flex-shrink:0}
-.stacked-legend-item .leg-score{font-weight:600;color:var(--text-primary)}
+/* Individual horizontal factor bars */
+.factor-bars{display:flex;flex-direction:column;gap:0.625rem}
+.factor-row{display:grid;grid-template-columns:90px 1fr 48px;align-items:center;gap:0.75rem}
+.factor-row .fr-label{font-family:var(--font-mono);font-size:0.6875rem;color:var(--text-secondary);text-align:left;white-space:nowrap}
+.factor-row .fr-track{height:22px;background:rgba(75,85,99,0.12);border-radius:var(--radius-sm);overflow:hidden;position:relative}
+.factor-row .fr-fill{height:100%;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:flex-end;padding-right:6px;font-family:var(--font-mono);font-size:0.5625rem;font-weight:700;color:#fff;min-width:0;transition:width 1.2s cubic-bezier(0.16,1,0.3,1)}
+.factor-row .fr-score{font-family:var(--font-mono);font-size:0.6875rem;font-weight:600;color:var(--text-primary);text-align:right}
 
 
 /* ================================================================
@@ -3331,22 +3330,7 @@ function buildMethodology() {
   const spiderNames = ['Score','Conviction','Risk/Reward','Confluence','Moat'];
   const totalMax = factorMaxes.reduce((s,v)=>s+v,0);
 
-  // Build live scoring HTML with placeholders for dynamic content
-  let liveHtml = `<div class="method-card">
-    <h4>Live Scoring Example</h4>
-    <div class="method-sub" id="liveScoringSubtitle">Real-time AAPL composite score</div>
-    <div class="live-score-header">
-      <span class="live-ticker-badge" id="liveTickerBadge">AAPL</span>
-      <span class="live-score-big" id="liveScoreBig" style="color:var(--emerald)">86.2 <span style="font-size:1rem;color:var(--text-muted)">/ ${totalMax}</span></span>
-
-    </div>
-    <div class="stacked-bar-container">
-      <div class="stacked-bar" id="liveStackedBar"></div>
-      <div class="stacked-legend" id="liveStackedLegend"></div>
-    </div>
-  </div>`;
-
-  // Build spider graph with SVG that we can animate
+  // Build merged Score Breakdown card: bars left, radar right
   const cx=200, cy=155, maxR=100, sides=5;
   const angleOffset = -Math.PI/2;
   function polarToXY(angle, radius) {
@@ -3354,7 +3338,6 @@ function buildMethodology() {
   }
 
   let staticSvg = '';
-  // Concentric rings
   [0.25, 0.5, 0.75, 1].forEach(pct => {
     const r = maxR * pct;
     let ringPath = '';
@@ -3365,36 +3348,47 @@ function buildMethodology() {
     }
     staticSvg += `<path d="${ringPath}Z" stroke="rgba(75,85,99,0.2)" stroke-width="1" fill="none"/>`;
   });
-  // Axis lines
   for (let i = 0; i < sides; i++) {
     const angle = angleOffset + (2 * Math.PI / sides) * i;
     const p = polarToXY(angle, maxR);
     staticSvg += `<line x1="${cx}" y1="${cy}" x2="${p.x.toFixed(1)}" y2="${p.y.toFixed(1)}" stroke="rgba(75,85,99,0.15)" stroke-width="1"/>`;
   }
-  // Axis label text (static names)
   const labelOffsets = [{dx:0,dy:-20},{dx:8,dy:4},{dx:8,dy:20},{dx:-8,dy:20},{dx:-8,dy:4}];
   for (let i = 0; i < sides; i++) {
     const angle = angleOffset + (2 * Math.PI / sides) * i;
     const lp = polarToXY(angle, maxR + 18);
     const anchor = i===0?'middle':i<3?'start':'end';
     staticSvg += `<text x="${(lp.x+labelOffsets[i].dx).toFixed(1)}" y="${(lp.y+labelOffsets[i].dy).toFixed(1)}" text-anchor="${anchor}" fill="#9CA3AF" font-family="JetBrains Mono" font-size="9" font-weight="600">${spiderNames[i]}</text>`;
-    // Value number directly under the label — same x and anchor
     const valX = lp.x+labelOffsets[i].dx;
     const valY = lp.y+labelOffsets[i].dy + 13;
     staticSvg += `<text x="${valX.toFixed(1)}" y="${valY.toFixed(1)}" text-anchor="${anchor}" fill="#F9FAFB" font-family="JetBrains Mono" font-size="11" font-weight="700" id="spiderVal${i}">0</text>`;
   }
 
-  let spiderHtml = `<div class="method-card">
-    <h4>Factor Profile <span style="color:var(--text-muted);font-weight:400;font-size:0.875rem;margin-left:0.5rem" id="spiderTickerLabel">AAPL</span></h4>
-    <div class="method-sub">Five-axis radar view of composite factor strengths</div>
-    <svg viewBox="0 0 400 320" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:480px;margin:0 auto;display:block" id="spiderSvg">
-      <defs><linearGradient id="spiderGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#3B82F6" stop-opacity="0.3"/><stop offset="100%" stop-color="#A855F7" stop-opacity="0.15"/></linearGradient></defs>
-      ${staticSvg}
-      <path d="" fill="url(#spiderGrad)" stroke="#3B82F6" stroke-width="2" id="spiderDataPath"/>
-      ${[0,1,2,3,4].map(i => `<circle cx="${cx}" cy="${cy}" r="5" fill="#3B82F6" stroke="#0B1120" stroke-width="2" id="spiderDot${i}"/>`).join('')}
-    </svg>
-    <div style="display:flex;justify-content:center;gap:1.25rem;margin-top:0.75rem;flex-wrap:wrap" id="spiderLegend"></div>
+  // Factor bar rows HTML
+  const factorBarRows = factorNames.map((name, i) =>
+    `<div class="factor-row"><span class="fr-label">${name}</span><div class="fr-track"><div class="fr-fill" id="factorFill${i}" style="background:${factorColors[i]};width:0%"></div></div><span class="fr-score" id="factorScore${i}">0/${factorMaxes[i]}</span></div>`
+  ).join('');
+
+  let liveHtml = `<div class="method-card">
+    <h4>Live Scoring Example</h4>
+    <div class="method-sub" id="liveScoringSubtitle">Real-time AAPL composite score</div>
+    <div class="live-score-header">
+      <span class="live-ticker-badge" id="liveTickerBadge">AAPL</span>
+      <span class="live-score-big" id="liveScoreBig" style="color:var(--emerald)">86.2 <span style="font-size:1rem;color:var(--text-muted)">/ ${totalMax}</span></span>
+    </div>
+    <div class="score-split">
+      <div class="factor-bars" id="factorBars">${factorBarRows}</div>
+      <div class="score-radar-wrap">
+        <svg viewBox="0 0 400 320" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:360px;margin:0 auto;display:block" id="spiderSvg">
+          <defs><linearGradient id="spiderGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#3B82F6" stop-opacity="0.3"/><stop offset="100%" stop-color="#A855F7" stop-opacity="0.15"/></linearGradient></defs>
+          ${staticSvg}
+          <path d="" fill="url(#spiderGrad)" stroke="#3B82F6" stroke-width="2" id="spiderDataPath"/>
+          ${[0,1,2,3,4].map(i => `<circle cx="${cx}" cy="${cy}" r="5" fill="#3B82F6" stroke="#0B1120" stroke-width="2" id="spiderDot${i}"/>`).join('')}
+        </svg>
+      </div>
+    </div>
   </div>`;
+  let spiderHtml = ''; // merged into liveHtml above
 
   // Demo terminal card — embedded between distribution and live scoring
   let demoCardHtml = `<div class="demo-grid" style="margin-bottom:1.5rem">
@@ -3501,7 +3495,7 @@ function buildMethodology() {
     // Update ticker badges
     document.getElementById('liveScoringSubtitle').textContent = 'Real-time ' + t.sym + ' composite score';
     document.getElementById('liveTickerBadge').textContent = t.sym;
-    document.getElementById('spiderTickerLabel').textContent = t.sym;
+    const stl = document.getElementById('spiderTickerLabel'); if (stl) stl.textContent = t.sym;
 
     // Odometer roll for big composite score
     const scoreBig = document.getElementById('liveScoreBig');
@@ -3521,33 +3515,21 @@ function buildMethodology() {
       scoreBig.innerHTML = buildOdometer(scoreStr, scoreColor) + ` <span class="odo-suffix" style="font-size:1rem;color:var(--text-muted)">/ ${totalMax}</span>`;
     }
 
-    // Stacked bar: create segments once, then morph flex values on each ticker change
-    const bar = document.getElementById('liveStackedBar');
-    if (!bar.children.length) {
-      // First load — create all segments at their initial proportions
-      t.scores.forEach((score, i) => {
-        const seg = document.createElement('div');
-        seg.className = 'stacked-seg';
-        seg.dataset.idx = i;
-        seg.style.background = factorColors[i];
-        seg.style.flex = String((score / totalMax) * 100);
-        seg.title = factorNames[i] + ': ' + score + '/' + factorMaxes[i];
-        seg.innerHTML = (score >= 8 ? score : '') + `<div class="seg-tooltip">${factorNames[i]}: ${score}/${factorMaxes[i]}</div>`;
-        bar.appendChild(seg);
-      });
-    } else {
-      // Subsequent tickers — morph existing segments to new proportions
-      Array.from(bar.children).forEach((seg, i) => {
-        const score = t.scores[i];
-        seg.style.flex = String((score / totalMax) * 100);
-        seg.title = factorNames[i] + ': ' + score + '/' + factorMaxes[i];
-        seg.innerHTML = (score >= 8 ? score : '') + `<div class="seg-tooltip">${factorNames[i]}: ${score}/${factorMaxes[i]}</div>`;
-      });
-    }
-
-    // Legend with odometer values
-    const legend = document.getElementById('liveStackedLegend');
-    legend.innerHTML = t.scores.map((score, i) => `<div class="stacked-legend-item"><span class="leg-color" style="background:${factorColors[i]}"></span>${factorNames[i]} <span class="leg-score" id="legScore${i}">${score}/${factorMaxes[i]}</span></div>`).join('');
+    // Individual horizontal factor bars — staggered grow-right animation
+    t.scores.forEach((score, i) => {
+      const fill = document.getElementById('factorFill' + i);
+      const scoreEl = document.getElementById('factorScore' + i);
+      const pct = (score / factorMaxes[i]) * 100;
+      if (fill) {
+        if (animate) {
+          fill.style.width = '0%';
+          setTimeout(() => { fill.style.width = pct + '%'; }, 80 * i);
+        } else {
+          fill.style.width = pct + '%';
+        }
+      }
+      if (scoreEl) scoreEl.textContent = score + '/' + factorMaxes[i];
+    });
 
     // ---- SPIDER GRAPH: morph from current shape to new shape ----
     const spiderVals = t.spider;
@@ -3604,20 +3586,7 @@ function buildMethodology() {
       }
     }
 
-    // Spider legend row with rolling numbers
-    const spLegend = document.getElementById('spiderLegend');
-    if (!animate) {
-      spLegend.innerHTML = spiderVals.map((v,i) => `<div style="font-family:var(--font-mono);font-size:0.6875rem;text-align:center"><div style="color:var(--text-muted)">${spiderNames[i]}</div><div style="font-weight:700" id="spLegVal${i}">${buildOdometer(String(v), v>=80?'var(--emerald)':v>=60?'var(--amber)':'var(--red)')}</div></div>`).join('');
-    } else {
-      // Roll existing legend odometers
-      for (let i = 0; i < sides; i++) {
-        const el = document.getElementById('spLegVal'+i);
-        if (el) {
-          const v = spiderVals[i];
-          rollOdometer(el, String(v), v>=80?'var(--emerald)':v>=60?'var(--amber)':'var(--red)');
-        }
-      }
-    }
+    // Spider legend removed — bars show the detail now
   }
 
   // Initial render (no animation)
