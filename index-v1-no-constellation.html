@@ -5,24 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tangency — AI-Powered Trading Intelligence</title>
 <meta name="description" content="AI-powered algorithmic scoring across 10 timeframes. Every signal explained. Every score decomposed. tangency.ai">
-
-<!-- Open Graph -->
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://tangency.ai">
-<meta property="og:title" content="Tangency — Where AI and Algorithms Converge">
-<meta property="og:description" content="Multi-timeframe signals. Every score explained. AI-powered algorithmic scoring across 31+ tickers, 10 timeframes, 147 data points per ticker.">
-<meta property="og:image" content="https://tangency.ai/og-image.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Tangency — AI-Powered Trading Intelligence">
-<meta property="og:site_name" content="Tangency">
-
-<!-- Twitter Card -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Tangency — Where AI and Algorithms Converge">
-<meta name="twitter:description" content="Multi-timeframe signals. Every score explained. AI-powered algorithmic scoring across 31+ tickers and 10 timeframes.">
-<meta name="twitter:image" content="https://tangency.ai/og-image.png">
-<meta name="twitter:image:alt" content="Tangency — AI-Powered Trading Intelligence">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -118,7 +100,7 @@ a{text-decoration:none;color:inherit}
 
 /* Laptop Frame */
 .laptop-wrap{position:relative;z-index:2;width:100%;max-width:1100px;margin:0 auto;padding:0 1.5rem;opacity:0;animation:fadeUp 0.8s ease 1.4s forwards}
-.laptop-frame{position:relative;border-radius:12px 12px 0 0;border:2px solid rgba(255,255,255,0.08);border-bottom:none;background:#0D1117;overflow:hidden;box-shadow:0 -4px 60px rgba(59,130,246,0.08),0 20px 80px rgba(0,0,0,0.6);pointer-events:none;user-select:none;-webkit-user-select:none;touch-action:none}
+.laptop-frame{position:relative;border-radius:12px 12px 0 0;border:2px solid rgba(255,255,255,0.08);border-bottom:none;background:#0D1117;overflow:hidden;box-shadow:0 -4px 60px rgba(59,130,246,0.08),0 20px 80px rgba(0,0,0,0.6)}
 .laptop-frame::before{content:'';display:block;padding-top:68%}
 .laptop-screen{position:absolute;inset:0;overflow:hidden}
 .laptop-bezel{background:linear-gradient(180deg,#1a1f2e 0%,#161b26 100%);height:100%;position:relative;padding:6px}
@@ -236,7 +218,8 @@ a{text-decoration:none;color:inherit}
    4. INTERACTIVE DEMO SECTION
    ================================================================ */
 .demo-section{padding:clamp(4rem,8vw,8rem) 0;background:var(--bg);position:relative;z-index:2}
-/* .demo-grid and .demo-text removed — terminal now embedded in scoring card */
+.demo-grid{display:grid;grid-template-columns:1fr 1.25fr;gap:3rem;align-items:start}
+.demo-text{padding-top:2rem}
 .demo-badge{display:inline-flex;align-items:center;gap:0.5rem;font-size:0.75rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--emerald);margin-bottom:1.25rem}
 .demo-badge .dot{width:8px;height:8px;border-radius:50%;background:var(--emerald);animation:pulse 2s ease-in-out infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
@@ -245,11 +228,7 @@ a{text-decoration:none;color:inherit}
 .demo-desc{color:var(--text-secondary);line-height:1.7;max-width:480px}
 
 /* Terminal Card */
-.terminal{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-xl);overflow:hidden;box-shadow:0 0 40px rgba(59,130,246,0.06),0 20px 60px rgba(0,0,0,0.4)}
-.terminal-embedded{background:transparent;border:none;border-radius:0;box-shadow:none;overflow:visible}
-.terminal-embedded .terminal-bar{border-radius:var(--radius-lg) var(--radius-lg) 0 0}
-.terminal-embedded .terminal-body{padding:1.25rem 0.5rem;min-height:auto}
-.card-divider{height:1px;background:var(--border);margin:1.25rem 0;opacity:0.6}
+.terminal{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-xl);overflow:hidden;box-shadow:0 0 40px rgba(59,130,246,0.06),0 20px 60px rgba(0,0,0,0.4);height:420px}
 .terminal-bar{display:flex;align-items:center;justify-content:space-between;padding:0.75rem 1rem;border-bottom:1px solid var(--border);background:rgba(17,24,39,0.5)}
 .terminal-dots{display:flex;gap:6px}
 .terminal-dots span{width:10px;height:10px;border-radius:50%}
@@ -303,7 +282,9 @@ a{text-decoration:none;color:inherit}
 .dim-bar{height:4px;background:rgba(75,85,99,0.3);border-radius:9999px;overflow:hidden}
 .dim-bar-fill{height:100%;border-radius:9999px;transition:width 1.8s cubic-bezier(0.16,1,0.3,1)}
 
-/* demo-grid mobile rule removed — terminal now embedded in scoring card */
+@media(max-width:768px){
+  .demo-grid{grid-template-columns:1fr;gap:2rem}
+}
 
 /* ================================================================
    5. FEATURE SHOWCASE — TABS
@@ -710,7 +691,7 @@ a{text-decoration:none;color:inherit}
 .method-pill .pill-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
 .method-pill .pill-weight{color:var(--text-muted);margin-left:0.25rem}
 
-/* Score Breakdown — Merged Card */
+/* Live Scoring Example — Stacked Bar (SIGNATURE ELEMENT) */
 .live-score-header{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:1rem}
 .live-ticker-badge{font-family:var(--font-mono);font-weight:700;padding:0.25rem 0.75rem;background:rgba(16,185,129,0.15);color:var(--emerald);border-radius:9999px;font-size:0.875rem}
 .live-score-big{font-family:var(--font-mono);font-weight:700;font-size:2rem}
@@ -722,16 +703,17 @@ a{text-decoration:none;color:inherit}
 .odo-static{display:inline-block;line-height:1}
 .live-score-label{font-size:0.75rem;color:var(--text-muted)}
 
-.score-split{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center}
-@media(max-width:768px){.score-split{grid-template-columns:1fr;gap:1.5rem}}
+.stacked-bar-container{margin-bottom:1rem}
+.stacked-bar{display:flex;height:40px;border-radius:var(--radius-md);overflow:hidden;gap:2px;width:100%}
+.stacked-seg{display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:0.5625rem;font-weight:700;color:#fff;min-width:0;position:relative;cursor:default;transition:flex 3s cubic-bezier(0.16,1,0.3,1)}
+.stacked-seg:hover{filter:brightness(1.15)}
+.stacked-seg .seg-tooltip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);padding:0.25rem 0.5rem;font-size:0.625rem;white-space:nowrap;z-index:10}
+.stacked-seg:hover .seg-tooltip{display:block}
 
-/* Individual horizontal factor bars */
-.factor-bars{display:flex;flex-direction:column;gap:0.625rem}
-.factor-row{display:grid;grid-template-columns:90px 1fr 48px;align-items:center;gap:0.75rem}
-.factor-row .fr-label{font-family:var(--font-mono);font-size:0.6875rem;color:var(--text-secondary);text-align:left;white-space:nowrap}
-.factor-row .fr-track{height:22px;background:rgba(75,85,99,0.12);border-radius:var(--radius-sm);overflow:hidden;position:relative}
-.factor-row .fr-fill{height:100%;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:flex-end;padding-right:6px;font-family:var(--font-mono);font-size:0.5625rem;font-weight:700;color:#fff;min-width:0;transition:width 1.2s cubic-bezier(0.16,1,0.3,1)}
-.factor-row .fr-score{font-family:var(--font-mono);font-size:0.6875rem;font-weight:600;color:var(--text-primary);text-align:right}
+.stacked-legend{display:flex;gap:0.75rem;flex-wrap:wrap;margin-top:0.75rem}
+.stacked-legend-item{display:flex;align-items:center;gap:0.375rem;font-family:var(--font-mono);font-size:0.6875rem;color:var(--text-secondary)}
+.stacked-legend-item .leg-color{width:10px;height:10px;border-radius:2px;flex-shrink:0}
+.stacked-legend-item .leg-score{font-weight:600;color:var(--text-primary)}
 
 
 /* ================================================================
@@ -1191,7 +1173,8 @@ a{text-decoration:none;color:inherit}
   <div class="container">
 
     <div class="footer-links">
-      <a href="https://x.com/tangency_ai" target="_blank" rel="noopener noreferrer">Twitter/X</a>
+      <a href="#" target="_blank" rel="noopener noreferrer">Twitter/X</a>
+      <a href="#" target="_blank" rel="noopener noreferrer">Substack</a>
       <a href="#" target="_blank" rel="noopener noreferrer">Terms</a>
       <a href="#" target="_blank" rel="noopener noreferrer">Privacy</a>
     </div>
@@ -1833,7 +1816,8 @@ window.addEventListener('resize', () => {
     {icon:'◎',label:'Correlation'},
     {icon:'≣',label:'Benchmark',badge:'BETA'},
     {sep:'CONNECT'},
-    {icon:'↗',label:'Twitter / X',ext:true}
+    {icon:'↗',label:'Twitter / X',ext:true},
+    {icon:'↗',label:'Substack',ext:true}
   ];
 
   const macroCards = [
@@ -3331,7 +3315,22 @@ function buildMethodology() {
   const spiderNames = ['Score','Conviction','Risk/Reward','Confluence','Moat'];
   const totalMax = factorMaxes.reduce((s,v)=>s+v,0);
 
-  // Build merged Score Breakdown card: bars left, radar right
+  // Build live scoring HTML with placeholders for dynamic content
+  let liveHtml = `<div class="method-card">
+    <h4>Live Scoring Example</h4>
+    <div class="method-sub" id="liveScoringSubtitle">Real-time AAPL composite score</div>
+    <div class="live-score-header">
+      <span class="live-ticker-badge" id="liveTickerBadge">AAPL</span>
+      <span class="live-score-big" id="liveScoreBig" style="color:var(--emerald)">86.2 <span style="font-size:1rem;color:var(--text-muted)">/ ${totalMax}</span></span>
+
+    </div>
+    <div class="stacked-bar-container">
+      <div class="stacked-bar" id="liveStackedBar"></div>
+      <div class="stacked-legend" id="liveStackedLegend"></div>
+    </div>
+  </div>`;
+
+  // Build spider graph with SVG that we can animate
   const cx=200, cy=155, maxR=100, sides=5;
   const angleOffset = -Math.PI/2;
   function polarToXY(angle, radius) {
@@ -3339,6 +3338,7 @@ function buildMethodology() {
   }
 
   let staticSvg = '';
+  // Concentric rings
   [0.25, 0.5, 0.75, 1].forEach(pct => {
     const r = maxR * pct;
     let ringPath = '';
@@ -3349,74 +3349,61 @@ function buildMethodology() {
     }
     staticSvg += `<path d="${ringPath}Z" stroke="rgba(75,85,99,0.2)" stroke-width="1" fill="none"/>`;
   });
+  // Axis lines
   for (let i = 0; i < sides; i++) {
     const angle = angleOffset + (2 * Math.PI / sides) * i;
     const p = polarToXY(angle, maxR);
     staticSvg += `<line x1="${cx}" y1="${cy}" x2="${p.x.toFixed(1)}" y2="${p.y.toFixed(1)}" stroke="rgba(75,85,99,0.15)" stroke-width="1"/>`;
   }
+  // Axis label text (static names)
   const labelOffsets = [{dx:0,dy:-20},{dx:8,dy:4},{dx:8,dy:20},{dx:-8,dy:20},{dx:-8,dy:4}];
   for (let i = 0; i < sides; i++) {
     const angle = angleOffset + (2 * Math.PI / sides) * i;
     const lp = polarToXY(angle, maxR + 18);
     const anchor = i===0?'middle':i<3?'start':'end';
     staticSvg += `<text x="${(lp.x+labelOffsets[i].dx).toFixed(1)}" y="${(lp.y+labelOffsets[i].dy).toFixed(1)}" text-anchor="${anchor}" fill="#9CA3AF" font-family="JetBrains Mono" font-size="9" font-weight="600">${spiderNames[i]}</text>`;
+    // Value number directly under the label — same x and anchor
     const valX = lp.x+labelOffsets[i].dx;
     const valY = lp.y+labelOffsets[i].dy + 13;
     staticSvg += `<text x="${valX.toFixed(1)}" y="${valY.toFixed(1)}" text-anchor="${anchor}" fill="#F9FAFB" font-family="JetBrains Mono" font-size="11" font-weight="700" id="spiderVal${i}">0</text>`;
   }
 
-  // Factor bar rows HTML
-  const factorBarRows = factorNames.map((name, i) =>
-    `<div class="factor-row"><span class="fr-label">${name}</span><div class="fr-track"><div class="fr-fill" id="factorFill${i}" style="background:${factorColors[i]};width:0%"></div></div><span class="fr-score" id="factorScore${i}">0/${factorMaxes[i]}</span></div>`
-  ).join('');
-
-  // Section header above the unified card
-  let demoHeaderHtml = `<div style="text-align:center;margin-bottom:2rem">
-    <h2 class="demo-headline">AI-curated tickers.<br><span class="blue">Updated in real-time.</span></h2>
-    <p class="demo-desc" style="margin:0.75rem auto 0;text-align:center;text-wrap:balance">Every score synthesizes <span style="color:#F9FAFB;font-weight:600">147 data points</span> from <span style="color:#F9FAFB;font-weight:600">8 independent sources</span> — price action, fundamentals, analyst consensus, macro indicators, volume profile, options flow, sentiment, and multi-timeframe technical signals.</p>
+  let spiderHtml = `<div class="method-card">
+    <h4>Factor Profile <span style="color:var(--text-muted);font-weight:400;font-size:0.875rem;margin-left:0.5rem" id="spiderTickerLabel">AAPL</span></h4>
+    <div class="method-sub">Five-axis radar view of composite factor strengths</div>
+    <svg viewBox="0 0 400 320" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:480px;margin:0 auto;display:block" id="spiderSvg">
+      <defs><linearGradient id="spiderGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#3B82F6" stop-opacity="0.3"/><stop offset="100%" stop-color="#A855F7" stop-opacity="0.15"/></linearGradient></defs>
+      ${staticSvg}
+      <path d="" fill="url(#spiderGrad)" stroke="#3B82F6" stroke-width="2" id="spiderDataPath"/>
+      ${[0,1,2,3,4].map(i => `<circle cx="${cx}" cy="${cy}" r="5" fill="#3B82F6" stroke="#0B1120" stroke-width="2" id="spiderDot${i}"/>`).join('')}
+    </svg>
+    <div style="display:flex;justify-content:center;gap:1.25rem;margin-top:0.75rem;flex-wrap:wrap" id="spiderLegend"></div>
   </div>`;
 
-  // Unified card: terminal search + score card on top, divider, then factor bars + radar below
-  let liveHtml = `<div class="method-card">
-    <!-- Embedded terminal: search bar + score output -->
-    <div class="terminal-embedded" role="img" aria-label="Animated demo of Tangency score engine">
-      <div class="terminal-bar">
-        <div class="terminal-dots"><span></span><span></span><span></span></div>
-        <span class="terminal-version">tangency_score_engine v3.1</span>
+  // Demo terminal card — embedded between distribution and live scoring
+  let demoCardHtml = `<div class="demo-grid" style="margin-bottom:1.5rem">
+      <div class="demo-text">
+        <!-- <div class="demo-badge"><span class="dot"></span> LIVE DEMO</div> -->
+        <h2 class="demo-headline">AI-curated tickers.<br><span class="blue">Updated in real-time.</span></h2>
+        <p class="demo-desc" style="margin-top:0.75rem">Every score synthesizes <span style="color:#F9FAFB;font-weight:600">147 data points</span> from <span style="color:#F9FAFB;font-weight:600">8 independent sources</span> — price action, fundamentals, analyst consensus, macro indicators, volume profile, options flow, sentiment, and multi-timeframe technical signals.</p>
       </div>
-      <div class="terminal-body">
-        <div class="terminal-search">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <span class="terminal-input" id="terminalInput"></span>
-          <span class="terminal-cursor" id="terminalCursor"></span>
+      <div class="terminal" role="img" aria-label="Animated demo of Tangency score engine">
+        <div class="terminal-bar">
+          <div class="terminal-dots"><span></span><span></span><span></span></div>
+          <span class="terminal-version">tangency_score_engine v3.1</span>
         </div>
-        <div class="score-card" id="scoreCard"></div>
+        <div class="terminal-body">
+          <div class="terminal-search">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            <span class="terminal-input" id="terminalInput"></span>
+            <span class="terminal-cursor" id="terminalCursor"></span>
+          </div>
+          <div class="score-card" id="scoreCard"></div>
+        </div>
       </div>
-    </div>
-    <!-- Divider -->
-    <div class="card-divider"></div>
-    <!-- Score breakdown: factor bars + radar -->
-    <h4 style="margin-top:0.25rem">Live Scoring Breakdown</h4>
-    <div class="method-sub" id="liveScoringSubtitle">Real-time AAPL composite score</div>
-    <div class="live-score-header">
-      <span class="live-ticker-badge" id="liveTickerBadge">AAPL</span>
-      <span class="live-score-big" id="liveScoreBig" style="color:var(--emerald)">86.2 <span style="font-size:1rem;color:var(--text-muted)">/ ${totalMax}</span></span>
-    </div>
-    <div class="score-split">
-      <div class="factor-bars" id="factorBars">${factorBarRows}</div>
-      <div class="score-radar-wrap">
-        <svg viewBox="0 0 400 320" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:360px;margin:0 auto;display:block" id="spiderSvg">
-          <defs><linearGradient id="spiderGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#3B82F6" stop-opacity="0.3"/><stop offset="100%" stop-color="#A855F7" stop-opacity="0.15"/></linearGradient></defs>
-          ${staticSvg}
-          <path d="" fill="url(#spiderGrad)" stroke="#3B82F6" stroke-width="2" id="spiderDataPath"/>
-          ${[0,1,2,3,4].map(i => `<circle cx="${cx}" cy="${cy}" r="5" fill="#3B82F6" stroke="#0B1120" stroke-width="2" id="spiderDot${i}"/>`).join('')}
-        </svg>
-      </div>
-    </div>
-  </div>`;
-  let spiderHtml = ''; // merged into liveHtml above
+    </div>`;
 
-  container.innerHTML = distHtml + demoHeaderHtml + liveHtml + spiderHtml;
+  container.innerHTML = distHtml + demoCardHtml + liveHtml + spiderHtml;
 
   // ---- ANIMATED TICKER ROTATION ENGINE ----
   let methTickerIdx = 0;
@@ -3498,7 +3485,7 @@ function buildMethodology() {
     // Update ticker badges
     document.getElementById('liveScoringSubtitle').textContent = 'Real-time ' + t.sym + ' composite score';
     document.getElementById('liveTickerBadge').textContent = t.sym;
-    const stl = document.getElementById('spiderTickerLabel'); if (stl) stl.textContent = t.sym;
+    document.getElementById('spiderTickerLabel').textContent = t.sym;
 
     // Odometer roll for big composite score
     const scoreBig = document.getElementById('liveScoreBig');
@@ -3518,21 +3505,33 @@ function buildMethodology() {
       scoreBig.innerHTML = buildOdometer(scoreStr, scoreColor) + ` <span class="odo-suffix" style="font-size:1rem;color:var(--text-muted)">/ ${totalMax}</span>`;
     }
 
-    // Individual horizontal factor bars — staggered grow-right animation
-    t.scores.forEach((score, i) => {
-      const fill = document.getElementById('factorFill' + i);
-      const scoreEl = document.getElementById('factorScore' + i);
-      const pct = (score / factorMaxes[i]) * 100;
-      if (fill) {
-        if (animate) {
-          fill.style.width = '0%';
-          setTimeout(() => { fill.style.width = pct + '%'; }, 80 * i);
-        } else {
-          fill.style.width = pct + '%';
-        }
-      }
-      if (scoreEl) scoreEl.textContent = score + '/' + factorMaxes[i];
-    });
+    // Stacked bar: create segments once, then morph flex values on each ticker change
+    const bar = document.getElementById('liveStackedBar');
+    if (!bar.children.length) {
+      // First load — create all segments at their initial proportions
+      t.scores.forEach((score, i) => {
+        const seg = document.createElement('div');
+        seg.className = 'stacked-seg';
+        seg.dataset.idx = i;
+        seg.style.background = factorColors[i];
+        seg.style.flex = String((score / totalMax) * 100);
+        seg.title = factorNames[i] + ': ' + score + '/' + factorMaxes[i];
+        seg.innerHTML = (score >= 8 ? score : '') + `<div class="seg-tooltip">${factorNames[i]}: ${score}/${factorMaxes[i]}</div>`;
+        bar.appendChild(seg);
+      });
+    } else {
+      // Subsequent tickers — morph existing segments to new proportions
+      Array.from(bar.children).forEach((seg, i) => {
+        const score = t.scores[i];
+        seg.style.flex = String((score / totalMax) * 100);
+        seg.title = factorNames[i] + ': ' + score + '/' + factorMaxes[i];
+        seg.innerHTML = (score >= 8 ? score : '') + `<div class="seg-tooltip">${factorNames[i]}: ${score}/${factorMaxes[i]}</div>`;
+      });
+    }
+
+    // Legend with odometer values
+    const legend = document.getElementById('liveStackedLegend');
+    legend.innerHTML = t.scores.map((score, i) => `<div class="stacked-legend-item"><span class="leg-color" style="background:${factorColors[i]}"></span>${factorNames[i]} <span class="leg-score" id="legScore${i}">${score}/${factorMaxes[i]}</span></div>`).join('');
 
     // ---- SPIDER GRAPH: morph from current shape to new shape ----
     const spiderVals = t.spider;
@@ -3589,7 +3588,20 @@ function buildMethodology() {
       }
     }
 
-    // Spider legend removed — bars show the detail now
+    // Spider legend row with rolling numbers
+    const spLegend = document.getElementById('spiderLegend');
+    if (!animate) {
+      spLegend.innerHTML = spiderVals.map((v,i) => `<div style="font-family:var(--font-mono);font-size:0.6875rem;text-align:center"><div style="color:var(--text-muted)">${spiderNames[i]}</div><div style="font-weight:700" id="spLegVal${i}">${buildOdometer(String(v), v>=80?'var(--emerald)':v>=60?'var(--amber)':'var(--red)')}</div></div>`).join('');
+    } else {
+      // Roll existing legend odometers
+      for (let i = 0; i < sides; i++) {
+        const el = document.getElementById('spLegVal'+i);
+        if (el) {
+          const v = spiderVals[i];
+          rollOdometer(el, String(v), v>=80?'var(--emerald)':v>=60?'var(--amber)':'var(--red)');
+        }
+      }
+    }
   }
 
   // Initial render (no animation)
