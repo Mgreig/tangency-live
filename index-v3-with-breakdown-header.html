@@ -3393,8 +3393,16 @@ function buildMethodology() {
         <div class="score-card" id="scoreCard"></div>
       </div>
     </div>
-    <!-- Score breakdown: factor bars + radar (flows directly from terminal score card) -->
-    <div class="score-split" style="margin-top:0.5rem">
+    <!-- Divider -->
+    <div class="card-divider"></div>
+    <!-- Score breakdown: factor bars + radar -->
+    <h4 style="margin-top:0.25rem">Live Scoring Breakdown</h4>
+    <div class="method-sub" id="liveScoringSubtitle">Real-time AAPL composite score</div>
+    <div class="live-score-header">
+      <span class="live-ticker-badge" id="liveTickerBadge">AAPL</span>
+      <span class="live-score-big" id="liveScoreBig" style="color:var(--emerald)">86.2 <span style="font-size:1rem;color:var(--text-muted)">/ ${totalMax}</span></span>
+    </div>
+    <div class="score-split">
       <div class="factor-bars" id="factorBars">${factorBarRows}</div>
       <div class="score-radar-wrap">
         <svg viewBox="0 0 400 320" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:360px;margin:0 auto;display:block" id="spiderSvg">
@@ -3487,9 +3495,28 @@ function buildMethodology() {
     const total = t.scores.reduce((s,v)=>s+v,0);
     const scoreColor = total >= 80 ? 'var(--emerald)' : total >= 60 ? 'var(--amber)' : 'var(--red)';
 
-    // Update ticker labels (breakdown header removed — just update spider label)
+    // Update ticker badges
+    document.getElementById('liveScoringSubtitle').textContent = 'Real-time ' + t.sym + ' composite score';
+    document.getElementById('liveTickerBadge').textContent = t.sym;
     const stl = document.getElementById('spiderTickerLabel'); if (stl) stl.textContent = t.sym;
+
+    // Odometer roll for big composite score
+    const scoreBig = document.getElementById('liveScoreBig');
     const scoreStr = total.toFixed(1);
+    if (animate) {
+      rollOdometer(scoreBig, scoreStr, scoreColor);
+      // Append suffix after odometer
+      const suffix = scoreBig.querySelector('.odo-suffix');
+      if (!suffix) {
+        const s = document.createElement('span');
+        s.className = 'odo-suffix';
+        s.style.cssText = 'font-size:1rem;color:var(--text-muted);margin-left:0.25rem';
+        s.textContent = '/ ' + totalMax;
+        scoreBig.appendChild(s);
+      }
+    } else {
+      scoreBig.innerHTML = buildOdometer(scoreStr, scoreColor) + ` <span class="odo-suffix" style="font-size:1rem;color:var(--text-muted)">/ ${totalMax}</span>`;
+    }
 
     // Individual horizontal factor bars — staggered grow-right animation
     t.scores.forEach((score, i) => {
