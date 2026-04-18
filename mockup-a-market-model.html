@@ -10,7 +10,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://tangency.ai">
 <meta property="og:title" content="Tangency — Where AI and Algorithms Converge">
-<meta property="og:description" content="Multi-timeframe signals. Every score explained. AI-powered algorithmic scoring across 40+ tickers, 10 timeframes, 200+ data points per ticker.">
+<meta property="og:description" content="Multi-timeframe signals. Every score explained. AI-powered algorithmic scoring across 31+ tickers, 10 timeframes, 147 data points per ticker.">
 <meta property="og:image" content="https://tangency.ai/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -250,6 +250,56 @@ a{text-decoration:none;color:inherit}
 .terminal-embedded .terminal-bar{border-radius:var(--radius-lg) var(--radius-lg) 0 0}
 .terminal-embedded .terminal-body{padding:1.25rem 0.5rem;min-height:auto}
 .card-divider{height:1px;background:var(--border);margin:1.25rem 0;opacity:0.6}
+
+/* Market Model Card */
+.market-model{padding:1.5rem;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-xl);margin-bottom:1.5rem}
+.market-model-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;flex-wrap:wrap;gap:0.5rem}
+.market-model-header h4{font-family:var(--font-display);font-weight:700;font-size:1.125rem;margin:0}
+.market-model-header .model-timestamp{font-family:var(--font-mono);font-size:0.6875rem;color:var(--text-muted)}
+.regime-strip{display:flex;align-items:center;gap:2rem;margin-bottom:1.5rem;flex-wrap:wrap}
+.regime-block{display:flex;flex-direction:column;gap:0.25rem}
+.regime-label{font-family:var(--font-mono);font-size:0.6875rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.1em}
+.regime-value{font-family:var(--font-display);font-weight:700;font-size:1.75rem;color:#F59E0B}
+.regime-score{display:flex;align-items:baseline;gap:0.5rem}
+.regime-score-num{font-family:var(--font-mono);font-size:2rem;font-weight:700;color:#F59E0B}
+.regime-score-max{font-family:var(--font-mono);font-size:1rem;color:var(--text-muted)}
+.regime-bar{flex:1;min-width:120px;max-width:240px;height:8px;background:rgba(75,85,99,0.3);border-radius:9999px;overflow:hidden}
+.regime-bar-fill{height:100%;border-radius:9999px;background:linear-gradient(90deg,#10B981,#F59E0B);transition:width 1.5s ease}
+.sentiment-matrix{display:flex;flex-direction:column;gap:0.5rem}
+.sentiment-dots{display:flex;gap:3px;flex-wrap:wrap;max-width:280px}
+.sentiment-dots .dot-bull{width:8px;height:8px;border-radius:50%;background:#10B981}
+.sentiment-dots .dot-neut{width:8px;height:8px;border-radius:50%;background:#F59E0B}
+.sentiment-dots .dot-bear{width:8px;height:8px;border-radius:50%;background:#6B7280}
+.sentiment-legend{display:flex;gap:1rem;font-family:var(--font-mono);font-size:0.6875rem}
+.sentiment-legend span{display:flex;align-items:center;gap:0.35rem}
+.sentiment-legend .leg-dot{width:6px;height:6px;border-radius:50%;display:inline-block}
+.model-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0.75rem}
+.model-mini{padding:0.875rem;border:1px solid var(--border);border-radius:var(--radius-lg);background:rgba(17,24,39,0.4)}
+.model-mini-title{display:flex;align-items:center;gap:0.5rem;font-family:var(--font-display);font-weight:600;font-size:0.8125rem;margin-bottom:0.625rem;color:var(--text-primary)}
+.model-mini-title svg{width:14px;height:14px;color:var(--blue)}
+.model-mini-row{display:flex;justify-content:space-between;align-items:center;padding:0.3rem 0;font-size:0.75rem}
+.model-mini-row .mm-label{color:var(--text-secondary)}
+.model-mini-row .mm-val{font-family:var(--font-mono);font-weight:600;color:var(--text-primary)}
+.mm-badge{font-family:var(--font-mono);font-size:0.625rem;font-weight:600;padding:0.15rem 0.4rem;border-radius:4px;text-transform:uppercase;letter-spacing:0.05em}
+.mm-badge-bullish{background:rgba(16,185,129,0.15);color:#10B981}
+.mm-badge-neutral{background:rgba(245,158,11,0.15);color:#F59E0B}
+.mm-badge-mixed{background:rgba(107,114,128,0.15);color:#9CA3AF}
+.mm-badge-strong{background:rgba(16,185,129,0.15);color:#10B981}
+.mm-badge-positive{background:rgba(16,185,129,0.15);color:#10B981}
+.mm-badge-gaining{background:rgba(245,158,11,0.15);color:#F59E0B}
+.mm-badge-aggressive{background:rgba(239,68,68,0.15);color:#EF4444}
+.mm-badge-normal{background:rgba(107,114,128,0.15);color:#9CA3AF}
+.mm-badge-elevated{background:rgba(239,68,68,0.15);color:#EF4444}
+.mm-badge-outperforming{background:rgba(59,130,246,0.15);color:#3B82F6}
+.mm-badge-selective{background:rgba(245,158,11,0.15);color:#F59E0B}
+.mm-badge-low{background:rgba(16,185,129,0.15);color:#10B981}
+.mm-badge-aligned{background:rgba(16,185,129,0.15);color:#10B981}
+.mm-badge-favorable{background:rgba(16,185,129,0.15);color:#10B981}
+@media(max-width:768px){
+  .model-grid{grid-template-columns:1fr}
+  .regime-strip{flex-direction:column;gap:1rem}
+  .sentiment-dots{max-width:100%}
+}
 .terminal-bar{display:flex;align-items:center;justify-content:space-between;padding:0.75rem 1rem;border-bottom:1px solid var(--border);background:rgba(17,24,39,0.5)}
 .terminal-dots{display:flex;gap:6px}
 .terminal-dots span{width:10px;height:10px;border-radius:50%}
@@ -912,11 +962,11 @@ a{text-decoration:none;color:inherit}
     <a href="#" class="nav-logo" aria-label="Tangency home"><svg xmlns="http://www.w3.org/2000/svg" viewBox="25 42 460 105" fill="none" style="height:32px;width:auto;display:block"><path d="M418.524 60.9545L418.641 61.2905L433.509 104.212L448.377 61.2905L448.494 60.9545H458.659L458.409 61.6284L435.256 124.127L435.257 124.128C434.201 126.985 432.884 129.368 431.302 131.267L431.303 131.268C429.719 133.193 427.87 134.629 425.757 135.563C423.672 136.495 421.328 136.955 418.736 136.955C417.289 136.955 415.986 136.834 414.832 136.588V136.587C413.724 136.375 412.897 136.154 412.404 135.908L412.032 135.721L412.147 135.322L414.278 127.935L414.413 127.469L414.883 127.589C416.881 128.1 418.621 128.279 420.111 128.144C421.54 128.014 422.817 127.379 423.951 126.201L423.958 126.193C425.114 125.037 426.208 123.115 427.216 120.372L428.715 116.284L408.607 61.6274L408.36 60.9545H418.524Z" fill="white" stroke="white"/><path d="M380.496 60.2443C384.394 60.2444 387.923 60.9667 391.075 62.4211C394.222 63.8736 396.809 65.9121 398.826 68.5363C400.847 71.1665 402.098 74.2319 402.582 77.7209L402.661 78.2902H393.319L393.222 77.9142C392.611 75.5396 391.253 73.4223 389.117 71.5617L389.113 71.5578C387.049 69.7181 384.242 68.7726 380.638 68.7726C377.463 68.7727 374.7 69.5993 372.329 71.2404L372.328 71.2414C369.976 72.8628 368.124 75.1637 366.784 78.1682L366.785 78.1691C365.469 81.1464 364.803 84.6622 364.803 88.7277C364.803 92.8887 365.457 96.4878 366.75 99.5373C368.069 102.59 369.909 104.939 372.262 106.608H372.261C374.63 108.27 377.416 109.108 380.638 109.108C382.757 109.108 384.666 108.74 386.372 108.012C388.08 107.283 389.521 106.239 390.701 104.877C391.877 103.52 392.72 101.886 393.223 99.9641L393.321 99.591H402.666L402.581 100.163C402.097 103.461 400.894 106.436 398.976 109.083C397.078 111.711 394.563 113.799 391.443 115.347L391.442 115.348C388.331 116.879 384.725 117.636 380.638 117.636C375.443 117.636 370.941 116.409 367.155 113.933C363.379 111.464 360.478 108.064 358.453 103.748C356.428 99.4341 355.422 94.5175 355.422 89.0109C355.422 83.4098 356.452 78.4452 358.526 74.1291V74.1271C360.491 70.0619 363.183 66.8208 366.603 64.4172L367.297 63.9474C371.081 61.4738 375.487 60.2443 380.496 60.2443Z" fill="white" stroke="white"/><path d="M325.699 60.2443C329.46 60.2443 332.775 61.016 335.629 62.5764H335.63C338.498 64.1204 340.722 66.4723 342.302 69.6086C343.887 72.7299 344.665 76.6495 344.665 81.341V116.5H335.284V81.9094C335.284 77.7102 334.195 74.5082 332.08 72.2355L332.079 72.2336C329.965 69.9403 327.054 68.7726 323.284 68.7726C320.684 68.7727 318.378 69.3342 316.353 70.4484L316.354 70.4494C314.359 71.5604 312.779 73.1819 311.614 75.3293C310.455 77.4652 309.864 80.078 309.864 83.1877V116.5H300.483V60.9543H309.58V69.2619C310.897 66.638 312.82 64.5091 315.342 62.881C318.05 61.1097 321.514 60.2443 325.699 60.2443Z" fill="white" stroke="white"/><path d="M266.649 117.136C261.393 117.136 256.86 115.976 253.048 113.656C249.26 111.313 246.337 108.045 244.277 103.855C242.241 99.6411 241.223 94.7405 241.223 89.1534C241.223 83.5663 242.241 78.642 244.277 74.3807C246.337 70.0956 249.201 66.7576 252.871 64.3665C256.564 61.9517 260.873 60.7443 265.797 60.7443C268.638 60.7443 271.443 61.2178 274.213 62.1648C276.983 63.1117 279.504 64.6506 281.777 66.7813C284.05 68.8883 285.861 71.6818 287.21 75.1619C288.56 78.642 289.234 82.9271 289.234 88.017V91.5682H247.189V84.3239H280.712C280.712 81.2462 280.096 78.5 278.865 76.0852C277.658 73.6705 275.929 71.7647 273.68 70.3679C271.455 68.9711 268.827 68.2727 265.797 68.2727C262.459 68.2727 259.571 69.1013 257.132 70.7585C254.717 72.392 252.859 74.5227 251.557 77.1506C250.255 79.7784 249.604 82.5956 249.604 85.6023V90.4318C249.604 94.5511 250.314 98.0431 251.734 100.908C253.179 103.749 255.179 105.915 257.736 107.406C260.293 108.874 263.264 109.608 266.649 109.608C268.851 109.608 270.84 109.3 272.615 108.685C274.414 108.045 275.965 107.098 277.267 105.844C278.569 104.565 279.575 102.979 280.286 101.085L288.382 103.358C287.53 106.104 286.098 108.519 284.085 110.602C282.073 112.662 279.587 114.272 276.628 115.432C273.669 116.568 270.342 117.136 266.649 117.136Z" fill="white"/><path d="M204.581 60.2443C208.18 60.2444 211.093 60.8429 213.28 62.0851H213.279C215.425 63.2674 217.092 64.6322 218.257 66.1906C219.309 67.5489 220.142 68.694 220.756 69.6193H220.842V60.9543H229.939V117.563C229.939 122.325 228.856 126.248 226.648 129.291L226.647 129.29C224.481 132.331 221.561 134.554 217.903 135.96C214.286 137.383 210.269 138.091 205.86 138.091C201.771 138.091 198.23 137.565 195.25 136.499V136.498C192.292 135.464 189.808 134.087 187.812 132.359C185.86 130.672 184.297 128.856 183.129 126.91L182.89 126.512L183.271 126.244L189.947 121.557L190.34 121.28L190.632 121.663C191.192 122.398 191.865 123.214 192.654 124.112L193.481 125.039L193.484 125.042C194.519 126.205 195.926 127.233 197.718 128.12L198.082 128.296L198.084 128.297C200.03 129.224 202.612 129.704 205.86 129.704C210.181 129.704 213.703 128.66 216.463 126.608C219.167 124.596 220.558 121.429 220.558 116.994V106.518C219.948 107.467 219.132 108.599 218.116 109.912C216.949 111.427 215.279 112.759 213.128 113.919L213.126 113.92C210.943 115.086 208.034 115.648 204.439 115.648C199.953 115.648 195.91 114.585 192.323 112.452L192.322 112.451C188.753 110.315 185.933 107.211 183.859 103.159L183.858 103.157C181.802 99.0937 180.786 94.1826 180.786 88.4435C180.786 82.7987 181.778 77.8577 183.781 73.6349L184.165 72.8508C186.133 68.9856 188.798 65.9536 192.162 63.7707L192.5 63.5539C196.015 61.3441 200.047 60.2443 204.581 60.2443ZM205.576 68.7726C202.113 68.7726 199.265 69.6474 197.001 71.3674C194.737 73.1055 193.026 75.4436 191.872 78.3976C190.738 81.3628 190.166 84.6618 190.166 88.301C190.166 92.0353 190.749 95.3182 191.903 98.1584L192.129 98.6779C193.293 101.238 194.936 103.259 197.052 104.757C199.319 106.321 202.151 107.119 205.576 107.119C208.859 107.119 211.599 106.369 213.822 104.895C216.049 103.417 217.754 101.286 218.928 98.4777C220.104 95.6653 220.701 92.2775 220.701 88.301C220.701 84.4206 220.116 81.0164 218.959 78.0793C217.806 75.1496 216.108 72.8746 213.873 71.2326C211.654 69.6022 208.898 68.7727 205.576 68.7726Z" fill="white" stroke="white"/><path d="M151.062 60.2443C154.823 60.2443 158.139 61.016 160.993 62.5764H160.994C163.861 64.1204 166.085 66.4723 167.666 69.6086C169.251 72.7299 170.028 76.6495 170.028 81.341V116.5H160.647V81.9094C160.647 77.7102 159.558 74.5082 157.443 72.2355L157.442 72.2336C155.329 69.9403 152.418 68.7726 148.647 68.7726C146.047 68.7727 143.741 69.3342 141.716 70.4484L141.717 70.4494C139.722 71.5604 138.142 73.1819 136.977 75.3293C135.818 77.4652 135.227 80.078 135.227 83.1877V116.5H125.846V60.9543H134.943V69.2619C136.26 66.638 138.183 64.5091 140.706 62.881C143.413 61.1097 146.878 60.2443 151.062 60.2443Z" fill="white" stroke="white"/><path d="M91.8793 60.2443C93.67 60.2443 95.7142 60.4617 98.0082 60.8918H98.0072C100.365 61.3057 102.634 62.1685 104.812 63.4748C107.056 64.8062 108.901 66.8076 110.357 69.4523C111.833 72.1334 112.55 75.6829 112.55 80.0627V116.5H103.169V109.781C102.576 110.741 101.77 111.735 100.759 112.764C99.3776 114.17 97.554 115.352 95.308 116.318C93.0274 117.298 90.2692 117.778 87.0502 117.779C83.5296 117.779 80.3192 117.115 77.4291 115.779L77.4261 115.778C74.5303 114.415 72.221 112.45 70.5111 109.885L70.5101 109.884C68.7898 107.279 67.9418 104.148 67.9418 100.517C67.9418 97.3301 68.5696 94.6948 69.8666 92.6496C71.1438 90.612 72.8528 89.0144 74.9867 87.8615C77.0898 86.7253 79.4059 85.881 81.932 85.3273C84.4563 84.7558 86.9929 84.3034 89.5414 83.9699H89.5424C92.8558 83.5439 95.546 83.2236 97.6107 83.0099C99.6771 82.7751 101.109 82.3934 101.964 81.9016L101.968 81.8996C102.745 81.4638 103.169 80.7084 103.169 79.4943V79.2101C103.169 75.7989 102.238 73.2169 100.437 71.3937L100.435 71.3918C98.6689 69.5816 95.9453 68.6311 92.1635 68.631C88.2303 68.631 85.2146 69.4921 83.058 71.1545C80.8299 72.8719 79.2931 74.6834 78.4125 76.5803L78.2201 76.9933L77.7904 76.84L69.8363 73.9992L69.3353 73.8205L69.5443 73.3312C70.9913 69.955 72.9323 67.3007 75.3783 65.3928L75.8383 65.0412C78.1543 63.3176 80.6666 62.1016 83.3724 61.3967C86.2515 60.6292 89.0875 60.2443 91.8793 60.2443ZM103.04 89.6447C102.615 89.8577 102.087 90.0539 101.466 90.2365L101.46 90.2385C100.255 90.5759 98.8638 90.8753 97.2885 91.1379L97.2816 91.1389C95.7391 91.3762 94.232 91.5905 92.7601 91.7805H92.7533C92.032 91.8632 91.3788 91.9401 90.7943 92.0109L89.2455 92.2062C87.0969 92.4865 85.0928 92.9408 83.2328 93.5685L83.2289 93.5705C81.4269 94.1636 79.9881 95.057 78.8939 96.2404L78.8929 96.2394C77.8635 97.355 77.3226 98.9035 77.3226 100.944C77.3227 103.712 78.3358 105.75 80.3383 107.137C82.4132 108.534 85.0656 109.25 88.3285 109.25C91.5782 109.25 94.2809 108.612 96.4603 107.363L96.4623 107.362C98.6889 106.099 100.347 104.48 101.457 102.502C102.592 100.484 103.169 98.1714 103.169 95.5327V89.3605L103.04 89.6447Z" fill="white" stroke="white"/><path d="M48.2441 47.8864V60.9547H59.8916V69.0573H48.2441V100.375C48.2441 102.71 48.5862 104.38 49.207 105.451H49.2061C49.8642 106.522 50.6759 107.215 51.6338 107.572C52.6921 107.932 53.8095 108.114 54.9883 108.114C55.8899 108.114 56.614 108.067 57.168 107.979C57.7575 107.861 58.2299 107.768 58.584 107.697L59.0615 107.601L59.1699 108.077L60.874 115.605L60.9707 116.031L60.5615 116.184C59.9606 116.41 59.1423 116.627 58.1191 116.841L58.1201 116.842C57.0517 117.091 55.7203 117.211 54.1367 117.211C51.6952 117.211 49.3053 116.685 46.9717 115.639L46.9697 115.638C44.6376 114.583 42.6997 112.974 41.1592 110.822L41.1562 110.819C39.6161 108.633 38.8633 105.898 38.8633 102.648V69.0573H30.625V60.9547H38.8633V47.8864H48.2441Z" fill="white" stroke="white"/><path d="M226 131.314L312.029 89.6713L329.021 124.775L242.992 166.418L226 131.314Z" fill="#0B1120"/><path d="M292.757 99L309.749 134.104L242.992 166.418L226 131.314L292.757 99ZM243.457 165.082L308.414 133.639L292.293 100.336L227.336 131.779L243.457 165.082Z" fill="#0B1120"/><path d="M323 83.213L174 156.213" stroke="#2E75E4" stroke-width="10"/></svg></a>
     <div class="nav-links" id="navLinks">
       <!-- For Traders / For Investors links removed from nav -->
-      <!-- <a href="#methodology">Features</a> -->
-      <!-- <a href="#platform">Platform</a> -->
-      <!-- <a href="#methodology">Scoring</a> -->
+      <a href="#methodology">Features</a>
+      <a href="#platform">Platform</a>
+      <a href="#methodology">Scoring</a>
       <!-- <a href="#pricing">Pricing</a> removed for pre-launch -->
-      <a href="https://app.tangency.ai" class="nav-links" style="color:var(--text-secondary)">Login</a>
+      <a href="#" class="nav-links" style="color:var(--text-secondary)">Login</a>
       <a href="#access" class="nav-cta">Sign Up</a>
     </div>
     <button class="nav-mobile-toggle" id="mobileToggle" aria-label="Toggle navigation">
@@ -1039,9 +1089,9 @@ a{text-decoration:none;color:inherit}
     <div class="reveal">
       <div class="tabs-nav" role="tablist" aria-label="Platform features">
         <button class="tab-btn active" role="tab" aria-selected="true" data-tab="pulse">Pulse Intelligence</button>
+        <button class="tab-btn" role="tab" aria-selected="false" data-tab="model">Market Intelligence</button>
         <button class="tab-btn" role="tab" aria-selected="false" data-tab="confluence">Confluence Engine</button>
         <button class="tab-btn" role="tab" aria-selected="false" data-tab="rankings">Rankings</button>
-        <button class="tab-btn" role="tab" aria-selected="false" data-tab="model">Market Intelligence</button>
         <button class="tab-btn" role="tab" aria-selected="false" data-tab="radar">Volatility Radar</button>
         <button class="tab-btn" role="tab" aria-selected="false" data-tab="earnings">Earnings & Reports</button>
         <button class="tab-btn" role="tab" aria-selected="false" data-tab="analyst">Analyst Ratings</button>
@@ -1058,14 +1108,21 @@ a{text-decoration:none;color:inherit}
           </div>
         </div>
 
-        <!-- TAB 2: Confluence Engine -->
+        <!-- TAB 2: Market Intelligence -->
+        <div class="tab-panel" id="panel-model" role="tabpanel">
+          <div class="tab-content">
+            <!-- marketModel placeholder removed for mockup -->
+          </div>
+        </div>
+
+        <!-- TAB 3: Confluence Engine -->
         <div class="tab-panel" id="panel-confluence" role="tabpanel">
           <div class="tab-content">
             <div class="confluence-panel" id="confluencePanel"></div>
           </div>
         </div>
 
-        <!-- TAB 3: Rankings -->
+        <!-- TAB 4: Rankings -->
         <div class="tab-panel" id="panel-rankings" role="tabpanel">
           <div class="tab-content">
             <div class="rankings-toolbar">
@@ -1087,14 +1144,7 @@ a{text-decoration:none;color:inherit}
           </div>
         </div>
 
-        <!-- TAB 4: Market Intelligence -->
-        <div class="tab-panel" id="panel-model" role="tabpanel">
-          <div class="tab-content">
-            <div class="market-model" id="marketModel"></div>
-          </div>
-        </div>
-
-        <!-- TAB 5: Volatility Radar -->
+        <!-- TAB 4: Volatility Radar -->
         <div class="tab-panel" id="panel-radar" role="tabpanel">
           <div class="tab-content">
             <div class="radar-panel" id="radarPanel"></div>
@@ -1132,9 +1182,29 @@ a{text-decoration:none;color:inherit}
 <section class="methodology-section" id="methodology">
 <canvas id="strand-canvas" aria-hidden="true"></canvas>
   <div class="container">
-    <div class="section-header reveal" style="display:none!important">
+    <div class="section-header reveal">
       <h2>See What Drives Every Score</h2>
       <p>Real-time composite scoring across 33 tickers. Watch the algorithm think.</p>
+    </div>
+    <!-- Market Model Card (Mockup A) -->
+    <div class="market-model reveal visible" style="margin-bottom:1.5rem">
+      <div class="market-model-header"><h4>Market Model</h4><span class="model-timestamp">Updated Apr 17, 2026 3:20 PM ET</span></div>
+      <div class="regime-strip">
+        <div class="regime-block"><span class="regime-label">Current Regime</span><span class="regime-value">SELECTIVE</span></div>
+        <div class="regime-block" style="flex:1;max-width:280px"><span class="regime-label">Composite Score</span><div class="regime-score"><span class="regime-score-num">63</span><span class="regime-score-max">/ 100</span></div><div class="regime-bar"><div class="regime-bar-fill" style="width:63%"></div></div></div>
+        <div class="sentiment-matrix"><span class="regime-label">Sentiment</span>
+          <div class="sentiment-dots"><span class="dot-bull"></span><span class="dot-bull"></span><span class="dot-bull"></span><span class="dot-bull"></span><span class="dot-bull"></span><span class="dot-bull"></span><span class="dot-bull"></span><span class="dot-bull"></span><span class="dot-bull"></span><span class="dot-bull"></span><span class="dot-bull"></span><span class="dot-bull"></span><span class="dot-bull"></span><span class="dot-bull"></span><span class="dot-bull"></span><span class="dot-bull"></span><span class="dot-neut"></span><span class="dot-neut"></span><span class="dot-neut"></span><span class="dot-neut"></span><span class="dot-neut"></span><span class="dot-neut"></span><span class="dot-neut"></span><span class="dot-neut"></span><span class="dot-neut"></span><span class="dot-neut"></span><span class="dot-neut"></span><span class="dot-neut"></span><span class="dot-neut"></span><span class="dot-neut"></span><span class="dot-neut"></span><span class="dot-neut"></span><span class="dot-neut"></span><span class="dot-bear"></span><span class="dot-bear"></span><span class="dot-bear"></span></div>
+          <div class="sentiment-legend"><span><span class="leg-dot" style="background:#10B981"></span> 16 Bullish</span><span><span class="leg-dot" style="background:#F59E0B"></span> 17 Neutral</span><span><span class="leg-dot" style="background:#6B7280"></span> 3 Bearish</span></div>
+        </div>
+      </div>
+      <div class="model-grid">
+        <div class="model-mini"><div class="model-mini-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>Trend</div><div class="model-mini-row"><span class="mm-label">% Above 50 SMA</span><span class="mm-val">86%</span><span class="mm-badge mm-badge-bullish">Bullish</span></div><div class="model-mini-row"><span class="mm-label">% Above 200 SMA</span><span class="mm-val">44%</span><span class="mm-badge mm-badge-neutral">Neutral</span></div><div class="model-mini-row"><span class="mm-label">Golden Crosses</span><span class="mm-val">9 / 36</span><span class="mm-badge mm-badge-mixed">Mixed</span></div></div>
+        <div class="model-mini"><div class="model-mini-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>Momentum</div><div class="model-mini-row"><span class="mm-label">Avg RSI(14)</span><span class="mm-val">61.7</span><span class="mm-badge mm-badge-strong">Strong</span></div><div class="model-mini-row"><span class="mm-label">Avg 1W Change</span><span class="mm-val">12.34%</span><span class="mm-badge mm-badge-positive">Positive</span></div><div class="model-mini-row"><span class="mm-label">Avg 1M Change</span><span class="mm-val">6.72%</span><span class="mm-badge mm-badge-gaining">Gaining</span></div></div>
+        <div class="model-mini"><div class="model-mini-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>Breadth</div><div class="model-mini-row"><span class="mm-label">% Above 200 SMA</span><span class="mm-val">44%</span><span class="mm-badge mm-badge-neutral">Neutral</span></div><div class="model-mini-row"><span class="mm-label">RS vs SPY Positive</span><span class="mm-val">67%</span><span class="mm-badge mm-badge-outperforming">Outperf.</span></div><div class="model-mini-row"><span class="mm-label">Bullish Breadth</span><span class="mm-val">31 / 36</span><span class="mm-badge mm-badge-positive">Positive</span></div></div>
+        <div class="model-mini"><div class="model-mini-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20h.01"/><path d="M7 20v-4"/><path d="M12 20v-8"/><path d="M17 20V8"/><path d="M22 4v16"/></svg>Risk Profile</div><div class="model-mini-row"><span class="mm-label">Beta Profile</span><span class="mm-val">Aggressive</span><span class="mm-badge mm-badge-aggressive">Aggr.</span></div><div class="model-mini-row"><span class="mm-label">Avg RVOL</span><span class="mm-val">1.04</span><span class="mm-badge mm-badge-normal">Normal</span></div><div class="model-mini-row"><span class="mm-label">High-Risk Names</span><span class="mm-val">26 / 36</span><span class="mm-badge mm-badge-elevated">Elevated</span></div></div>
+        <div class="model-mini"><div class="model-mini-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Macro Context</div><div class="model-mini-row"><span class="mm-label">Dominant Regime</span><span class="mm-val">Neutral</span><span class="mm-badge mm-badge-neutral">Neutral</span></div><div class="model-mini-row"><span class="mm-label">Regime Alignment</span><span class="mm-val">67%</span><span class="mm-badge mm-badge-aligned">Aligned</span></div><div class="model-mini-row"><span class="mm-label">Fed Funds Rate</span><span class="mm-val">3.64%</span><span class="mm-badge mm-badge-normal">Normal</span></div></div>
+        <div class="model-mini"><div class="model-mini-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>Sentiment</div><div class="model-mini-row"><span class="mm-label">M21 Score</span><span class="mm-val">6/10</span><span class="mm-badge mm-badge-selective">Selective</span></div><div class="model-mini-row"><span class="mm-label">Bullish %</span><span class="mm-val">44%</span><span class="mm-badge mm-badge-mixed">Mixed</span></div><div class="model-mini-row"><span class="mm-label">Bearish %</span><span class="mm-val">8%</span><span class="mm-badge mm-badge-low">Low</span></div></div>
+      </div>
     </div>
     <div class="method-v2 reveal" id="methodLayers"></div>
   </div>
@@ -2477,6 +2547,7 @@ let isHeatmap = false;
 
 function buildRankings() {
   const tbody = document.getElementById('rankingsBody');
+  if (!tbody) return;
   const thead = document.getElementById('rankingsHead');
   const table = document.getElementById('rankingsTable');
 
@@ -2558,7 +2629,8 @@ function buildRankings() {
 buildRankings();
 
 // Heatmap toggle
-document.getElementById('heatmapToggle').addEventListener('click', function() {
+document.getElementById('heatmapToggle');
+if (document.getElementById('heatmapToggle')) document.getElementById('heatmapToggle').addEventListener('click', function() {
   isHeatmap = !isHeatmap;
   this.classList.toggle('active', isHeatmap);
   this.textContent = isHeatmap ? '☷ Heatmap ON' : '☷ Heatmap';
@@ -2568,6 +2640,7 @@ document.getElementById('heatmapToggle').addEventListener('click', function() {
 // ---- TAB 2: PULSE INTELLIGENCE v2 ----
 function buildPulseCards() {
   const container = document.getElementById('pulseCards');
+  if (!container) return;
   container.className = 'pulse-v2-cards';
 
   function arcGauge(score, color, tierLabel) {
@@ -2763,6 +2836,7 @@ buildPulseCards();
 // ---- TAB 3: MARKET INTELLIGENCE ----
 function buildMarketIntel() {
   const container = document.getElementById('marketModel');
+  if (!container) return;
   container.className = 'market-intel';
 
   const insights = [
@@ -2824,6 +2898,7 @@ buildMarketIntel();
 // ---- TAB 4: EARNINGS & REPORTS v2 ----
 function buildEarnings() {
   const container = document.getElementById('earningsGrid');
+  if (!container) return;
   container.className = 'earnings-v2';
 
   const tags = [
@@ -2928,6 +3003,7 @@ buildEarnings();
 // ---- TAB 5: CONFLUENCE ENGINE (Cloud Confluence + Heatmap) ----
 function buildConfluence() {
   const container = document.getElementById('confluencePanel');
+  if (!container) return;
 
   // Generate multi-layer Cloud Confluence chart matching the product's multi-timeframe Ichimoku overlay
   function buildCloudChart() {
@@ -3221,6 +3297,7 @@ buildConfluence();
 // ---- TAB 6: ANALYST RATINGS ----
 function buildAnalyst() {
   const container = document.getElementById('analystPanel');
+  if (!container) return;
   const consensus = [{label:'Strong Buy',count:28,pct:63.6,color:'#10B981'},{label:'Buy',count:12,pct:27.3,color:'#34D399'},{label:'Hold',count:3,pct:6.8,color:'#F59E0B'},{label:'Sell',count:1,pct:2.3,color:'#EF4444'},{label:'Strong Sell',count:0,pct:0,color:'#DC2626'}];
   const actions = [
     {date:'Apr 9',firm:'Wells Fargo',action:'Upgrade',target:'$850 → $1,050',rating:'Overweight',color:'var(--emerald)',isNew:true},
@@ -3373,7 +3450,7 @@ function buildMethodology() {
   // Section header above the unified card
   let demoHeaderHtml = `<div style="text-align:center;margin-bottom:2rem">
     <h2 class="demo-headline">AI-curated tickers.<br><span class="blue">Updated in real-time.</span></h2>
-    <p class="demo-desc" style="margin:0.75rem auto 0;text-align:center;text-wrap:balance">Every score synthesizes <span style="color:#F9FAFB;font-weight:600">200+ data points</span> from <span style="color:#F9FAFB;font-weight:600">10+ independent sources</span> — price action, fundamentals, analyst consensus, macro indicators, volume profile, options flow, sentiment, and multi-timeframe technical signals.</p>
+    <p class="demo-desc" style="margin:0.75rem auto 0;text-align:center;text-wrap:balance">Every score synthesizes <span style="color:#F9FAFB;font-weight:600">147 data points</span> from <span style="color:#F9FAFB;font-weight:600">8 independent sources</span> — price action, fundamentals, analyst consensus, macro indicators, volume profile, options flow, sentiment, and multi-timeframe technical signals.</p>
   </div>`;
 
   // Unified card: terminal search + score card on top, divider, then factor bars + radar below
@@ -3408,7 +3485,50 @@ function buildMethodology() {
   </div>`;
   let spiderHtml = ''; // merged into liveHtml above
 
-  container.innerHTML = demoHeaderHtml + liveHtml + spiderHtml;
+  let marketModelHtml = ''; // rendered as static HTML above methodLayers
+  /* Market Model rendered as static HTML above methodLayers
+  '<div class="market-model">'
+    + '<div class="market-model-header"><h4>Market Model</h4><span class="model-timestamp">Updated Apr 17, 2026 3:20 PM ET</span></div>'
+    + '<div class="regime-strip">'
+    + '<div class="regime-block"><span class="regime-label">Current Regime</span><span class="regime-value">SELECTIVE</span></div>'
+    + '<div class="regime-block" style="flex:1;max-width:280px"><span class="regime-label">Composite Score</span>'
+    + '<div class="regime-score"><span class="regime-score-num">63</span><span class="regime-score-max">/ 100</span></div>'
+    + '<div class="regime-bar"><div class="regime-bar-fill" style="width:63%"></div></div></div>'
+    + '<div class="sentiment-matrix"><span class="regime-label">Sentiment</span>'
+    + '<div class="sentiment-dots">' + bullDots + neutDots + bearDots + '</div>'
+    + '<div class="sentiment-legend">'
+    + '<span><span class="leg-dot" style="background:#10B981"></span> 16 Bullish</span>'
+    + '<span><span class="leg-dot" style="background:#F59E0B"></span> 17 Neutral</span>'
+    + '<span><span class="leg-dot" style="background:#6B7280"></span> 3 Bearish</span>'
+    + '</div></div></div>'
+    + '<div class="model-grid">'
+    + '<div class="model-mini"><div class="model-mini-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>Trend</div>'
+    + '<div class="model-mini-row"><span class="mm-label">% Above 50 SMA</span><span class="mm-val">86%</span><span class="mm-badge mm-badge-bullish">Bullish</span></div>'
+    + '<div class="model-mini-row"><span class="mm-label">% Above 200 SMA</span><span class="mm-val">44%</span><span class="mm-badge mm-badge-neutral">Neutral</span></div>'
+    + '<div class="model-mini-row"><span class="mm-label">Golden Crosses</span><span class="mm-val">9 / 36</span><span class="mm-badge mm-badge-mixed">Mixed</span></div></div>'
+    + '<div class="model-mini"><div class="model-mini-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>Momentum</div>'
+    + '<div class="model-mini-row"><span class="mm-label">Avg RSI(14)</span><span class="mm-val">61.7</span><span class="mm-badge mm-badge-strong">Strong</span></div>'
+    + '<div class="model-mini-row"><span class="mm-label">Avg 1W Change</span><span class="mm-val">12.34%</span><span class="mm-badge mm-badge-positive">Positive</span></div>'
+    + '<div class="model-mini-row"><span class="mm-label">Avg 1M Change</span><span class="mm-val">6.72%</span><span class="mm-badge mm-badge-gaining">Gaining</span></div></div>'
+    + '<div class="model-mini"><div class="model-mini-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>Breadth</div>'
+    + '<div class="model-mini-row"><span class="mm-label">% Above 200 SMA</span><span class="mm-val">44%</span><span class="mm-badge mm-badge-neutral">Neutral</span></div>'
+    + '<div class="model-mini-row"><span class="mm-label">RS vs SPY Positive</span><span class="mm-val">67%</span><span class="mm-badge mm-badge-outperforming">Outperf.</span></div>'
+    + '<div class="model-mini-row"><span class="mm-label">Bullish Breadth</span><span class="mm-val">31 / 36</span><span class="mm-badge mm-badge-positive">Positive</span></div></div>'
+    + '<div class="model-mini"><div class="model-mini-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20h.01"/><path d="M7 20v-4"/><path d="M12 20v-8"/><path d="M17 20V8"/><path d="M22 4v16"/></svg>Risk Profile</div>'
+    + '<div class="model-mini-row"><span class="mm-label">Beta Profile</span><span class="mm-val">Aggressive</span><span class="mm-badge mm-badge-aggressive">Aggr.</span></div>'
+    + '<div class="model-mini-row"><span class="mm-label">Avg RVOL</span><span class="mm-val">1.04</span><span class="mm-badge mm-badge-normal">Normal</span></div>'
+    + '<div class="model-mini-row"><span class="mm-label">High-Risk Names</span><span class="mm-val">26 / 36</span><span class="mm-badge mm-badge-elevated">Elevated</span></div></div>'
+    + '<div class="model-mini"><div class="model-mini-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Macro Context</div>'
+    + '<div class="model-mini-row"><span class="mm-label">Dominant Regime</span><span class="mm-val">Neutral</span><span class="mm-badge mm-badge-neutral">Neutral</span></div>'
+    + '<div class="model-mini-row"><span class="mm-label">Regime Alignment</span><span class="mm-val">67%</span><span class="mm-badge mm-badge-aligned">Aligned</span></div>'
+    + '<div class="model-mini-row"><span class="mm-label">Fed Funds Rate</span><span class="mm-val">3.64%</span><span class="mm-badge mm-badge-normal">Normal</span></div></div>'
+    + '<div class="model-mini"><div class="model-mini-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>Sentiment</div>'
+    + '<div class="model-mini-row"><span class="mm-label">M21 Score</span><span class="mm-val">6/10</span><span class="mm-badge mm-badge-selective">Selective</span></div>'
+    + '<div class="model-mini-row"><span class="mm-label">Bullish %</span><span class="mm-val">44%</span><span class="mm-badge mm-badge-mixed">Mixed</span></div>'
+    + '<div class="model-mini-row"><span class="mm-label">Bearish %</span><span class="mm-val">8%</span><span class="mm-badge mm-badge-low">Low</span></div></div>'
+    + '</div></div>'; */
+
+  container.innerHTML = distHtml + marketModelHtml + demoHeaderHtml + liveHtml + spiderHtml;
 
   // ---- ANIMATED TICKER ROTATION ENGINE ----
   let methTickerIdx = 0;
@@ -3584,12 +3704,12 @@ buildMethodology();
 // ---- STATS ROW ----
 function buildStats() {
   const stats = [
-    {num:40,suffix:'+',label:'Tickers Tracked'},
+    {num:31,suffix:'+',label:'Tickers Tracked'},
     {num:10,suffix:'',label:'Timeframes Scanned'},
     {num:'5m–1M',suffix:'',label:'Timeframe Coverage',isText:true},
-    {num:200,suffix:'+',label:'Data Points per Ticker'},
+    {num:147,suffix:'',label:'Data Points per Ticker'},
     {num:30,suffix:'s',label:'Signal Refresh'},
-    {num:10,suffix:'+',label:'Independent Sources'}
+    {num:8,suffix:'',label:'Independent Sources'}
   ];
   const grid = document.getElementById('statsGrid');
   grid.innerHTML = stats.map(s => `<div class="stat-item">

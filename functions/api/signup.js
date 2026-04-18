@@ -138,11 +138,11 @@ function welcomeEmailHTML() {
   <div style="background:rgba(59,130,246,0.06);border:1px solid rgba(59,130,246,0.15);border-radius:8px;padding:20px;margin:24px 0;">
     <div style="font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#3B82F6;margin-bottom:12px;">What you'll get access to</div>
     <table cellpadding="0" cellspacing="0" width="100%">
-      <tr><td style="padding:4px 0;font-size:14px;color:#D1D5DB;">&#8226; AI-curated signals across 31+ tickers</td></tr>
+      <tr><td style="padding:4px 0;font-size:14px;color:#D1D5DB;">&#8226; AI-curated signals across 40+ tickers</td></tr>
       <tr><td style="padding:4px 0;font-size:14px;color:#D1D5DB;">&#8226; 10 timeframes scanned every 30 seconds</td></tr>
       <tr><td style="padding:4px 0;font-size:14px;color:#D1D5DB;">&#8226; Every score decomposed and explained</td></tr>
-      <tr><td style="padding:4px 0;font-size:14px;color:#D1D5DB;">&#8226; 147 data points per ticker</td></tr>
-      <tr><td style="padding:4px 0;font-size:14px;color:#D1D5DB;">&#8226; 8 independent analysis sources</td></tr>
+      <tr><td style="padding:4px 0;font-size:14px;color:#D1D5DB;">&#8226; 200+ data points per ticker</td></tr>
+      <tr><td style="padding:4px 0;font-size:14px;color:#D1D5DB;">&#8226; 10+ independent analysis sources</td></tr>
     </table>
   </div>
 
