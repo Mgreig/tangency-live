@@ -147,7 +147,7 @@ function welcomeEmailHTML() {
   </div>
 
   <p style="margin:0;font-size:13px;line-height:1.6;color:#6B7280;">
-    In the meantime, follow us on <a href="https://x.com/tangencyai" style="color:#3B82F6;text-decoration:none;">X/Twitter</a> for updates.
+    In the meantime, follow us on <a href="https://x.com/tangency_ai" style="color:#3B82F6;text-decoration:none;">X/Twitter</a> for updates.
   </p>
 </td></tr>
 
