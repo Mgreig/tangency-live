@@ -1129,10 +1129,10 @@ a{text-decoration:none;color:inherit}
 <!-- ============================================================
      6. SCORING METHODOLOGY
      ============================================================ -->
-<section class="methodology-section" id="methodology" style="display:none!important">
+<section class="methodology-section" id="methodology">
 <canvas id="strand-canvas" aria-hidden="true"></canvas>
   <div class="container">
-    <div class="section-header reveal">
+    <div class="section-header reveal" style="display:none!important">
       <h2>See What Drives Every Score</h2>
       <p>Real-time composite scoring across 33 tickers. Watch the algorithm think.</p>
     </div>
@@ -3408,7 +3408,7 @@ function buildMethodology() {
   </div>`;
   let spiderHtml = ''; // merged into liveHtml above
 
-  container.innerHTML = distHtml + demoHeaderHtml + liveHtml + spiderHtml;
+  container.innerHTML = demoHeaderHtml + liveHtml + spiderHtml;
 
   // ---- ANIMATED TICKER ROTATION ENGINE ----
   let methTickerIdx = 0;
