@@ -1,7 +1,9 @@
 // Cloudflare Pages Function — handles email signup
 // POST /api/signup { email: "..." }
-// 1) Sends welcome email via Resend
-// 2) Logs signup to Google Sheet via Apps Script webhook
+// 1) Creates a Clerk waitlist entry (source of truth — must succeed)
+// 2) Sends welcome email via Resend
+// 3) Logs signup to Google Sheet via Apps Script webhook (DEPRECATED safety net;
+//    remove after existing entries are migrated to Clerk)
 
 const ALLOWED_ORIGINS = [
   'https://tangency.ai',
@@ -48,13 +50,46 @@ export async function onRequestPost(context) {
       });
     }
 
+    const CLERK_SECRET_KEY = context.env.CLERK_SECRET_KEY;
     const RESEND_API_KEY = context.env.RESEND_API_KEY;
     const SHEET_WEBHOOK = context.env.SHEET_WEBHOOK;
 
-    // Fire both requests in parallel
+    // 1. Clerk waitlist — source of truth. Must succeed (or already exist)
+    //    before we confirm to the user.
+    if (!CLERK_SECRET_KEY) {
+      console.error('CLERK_SECRET_KEY not configured');
+      return new Response(JSON.stringify({ error: 'Signup temporarily unavailable' }), {
+        status: 503, headers,
+      });
+    }
+
+    const clerkRes = await fetch('https://api.clerk.com/v1/waitlist_entries', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${CLERK_SECRET_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email_address: email, notify: true }),
+    });
+
+    if (!clerkRes.ok) {
+      const errText = await clerkRes.text();
+      // Clerk returns 422 with a `duplicate_record` / already-exists code when
+      // the email is already on the waitlist. Treat that as success so users
+      // who re-submit don't see an error.
+      const isDuplicate = clerkRes.status === 422 && /duplicate|already/i.test(errText);
+      if (!isDuplicate) {
+        console.error('Clerk waitlist error:', clerkRes.status, errText);
+        return new Response(JSON.stringify({ error: 'Could not add to waitlist' }), {
+          status: 502, headers,
+        });
+      }
+    }
+
+    // 2 + 3. Welcome email + legacy sheet log, in parallel. Non-blocking —
+    //        the Clerk entry is already persisted at this point.
     const promises = [];
 
-    // 1. Welcome email via Resend
     if (RESEND_API_KEY) {
       promises.push(
         fetch('https://api.resend.com/emails', {
@@ -73,7 +108,8 @@ export async function onRequestPost(context) {
       );
     }
 
-    // 2. Log to Google Sheet via Apps Script
+    // DEPRECATED: Google Sheet is no longer the system of record. Kept as a
+    // safety net until existing entries are migrated to Clerk, then remove.
     if (SHEET_WEBHOOK) {
       promises.push(
         fetch(SHEET_WEBHOOK, {
@@ -123,7 +159,7 @@ function welcomeEmailHTML() {
 <table width="100%" cellpadding="0" cellspacing="0" style="max-width:520px;background:#111827;border-radius:12px;border:1px solid #1F2937;overflow:hidden;">
 
 <tr><td style="padding:32px 32px 24px;text-align:center;border-bottom:1px solid #1F2937;">
-  <div style="font-size:24px;font-weight:700;color:#F9FAFB;letter-spacing:-0.02em;">tangency<span style="color:#3B82F6;">.</span>ai</div>
+  <img src="https://tangency.ai/apple-touch-icon.png" alt="Tangency" width="72" style="display:block;margin:0 auto;width:72px;height:auto;border:0;outline:none;text-decoration:none;">
 </td></tr>
 
 <tr><td style="padding:32px;">
@@ -134,17 +170,6 @@ function welcomeEmailHTML() {
   <p style="margin:0 0 20px;font-size:15px;line-height:1.7;color:#9CA3AF;">
     When your spot opens, you'll get an email with your invite link and founding member pricing details.
   </p>
-
-  <div style="background:rgba(59,130,246,0.06);border:1px solid rgba(59,130,246,0.15);border-radius:8px;padding:20px;margin:24px 0;">
-    <div style="font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#3B82F6;margin-bottom:12px;">What you'll get access to</div>
-    <table cellpadding="0" cellspacing="0" width="100%">
-      <tr><td style="padding:4px 0;font-size:14px;color:#D1D5DB;">&#8226; AI-curated signals across 40+ tickers</td></tr>
-      <tr><td style="padding:4px 0;font-size:14px;color:#D1D5DB;">&#8226; 10 timeframes scanned every 30 seconds</td></tr>
-      <tr><td style="padding:4px 0;font-size:14px;color:#D1D5DB;">&#8226; Every score decomposed and explained</td></tr>
-      <tr><td style="padding:4px 0;font-size:14px;color:#D1D5DB;">&#8226; 200+ data points per ticker</td></tr>
-      <tr><td style="padding:4px 0;font-size:14px;color:#D1D5DB;">&#8226; 10+ independent analysis sources</td></tr>
-    </table>
-  </div>
 
   <p style="margin:0;font-size:13px;line-height:1.6;color:#6B7280;">
     In the meantime, follow us on <a href="https://x.com/tangency_ai" style="color:#3B82F6;text-decoration:none;">X/Twitter</a> for updates.
