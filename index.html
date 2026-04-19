@@ -330,7 +330,7 @@ a{text-decoration:none;color:inherit}
 
 /* 3D Coverflow Carousel */
 .coverflow-viewport{perspective:1200px;overflow:hidden;padding:2rem 0 3rem}
-.coverflow-track{position:relative;height:860px}
+.coverflow-track{position:relative;height:940px}
 .tab-panel{position:absolute;top:0;left:50%;width:min(82%,1100px);transition:transform 0.55s cubic-bezier(0.32,0.72,0,1),opacity 0.55s cubic-bezier(0.32,0.72,0,1),filter 0.55s cubic-bezier(0.32,0.72,0,1);transform-origin:center top;will-change:transform,opacity,filter}
 .tab-panel.cf-active{transform:translate(-50%,0) scale(1) rotateY(0);opacity:1;z-index:10;filter:brightness(1);pointer-events:none}
 .tab-panel.cf-left-1{transform:translate(-108%,0) scale(0.82) rotateY(6deg);opacity:0.5;z-index:5;filter:brightness(0.55);pointer-events:none}
@@ -338,13 +338,13 @@ a{text-decoration:none;color:inherit}
 .tab-panel.cf-right-1{transform:translate(8%,0) scale(0.82) rotateY(-6deg);opacity:0.5;z-index:5;filter:brightness(0.55);pointer-events:none}
 .tab-panel.cf-right-2{transform:translate(48%,0) scale(0.68) rotateY(-10deg);opacity:0.25;z-index:2;filter:brightness(0.35);pointer-events:none}
 .tab-panel.cf-hidden{transform:translate(-50%,0) scale(0.5) rotateY(0);opacity:0;z-index:0;pointer-events:none;filter:brightness(0.2)}
-.tab-caption{text-align:center;font-size:clamp(0.875rem,1.25vw,1rem);color:var(--text-secondary);line-height:1.65;max-width:600px;margin:1rem auto 0;padding:0 1rem;text-wrap:balance}
+.tab-caption{text-align:center;font-size:clamp(0.875rem,1.25vw,1rem);color:var(--text-secondary);line-height:1.65;max-width:600px;margin:1rem auto 0;padding:0 1rem 0.5rem;text-wrap:balance}
 .tab-content{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-xl);overflow:hidden;overflow-y:auto;height:820px;pointer-events:none;user-select:none;-webkit-user-select:none}
 
 /* Mobile: simple crossfade instead of 3D coverflow */
 @media(max-width:768px){
   .coverflow-viewport{perspective:none;overflow:hidden;padding:1rem 0 2rem}
-  .coverflow-track{height:760px}
+  .coverflow-track{height:820px}
   .tab-panel{width:92%;transition:opacity 0.4s ease,visibility 0.4s ease;transform:translate(-50%,0) scale(1) rotateY(0) !important;filter:brightness(1) !important}
   .tab-panel.cf-active{opacity:1;visibility:visible;z-index:10}
   .tab-panel.cf-left-1,.tab-panel.cf-left-2,.tab-panel.cf-right-1,.tab-panel.cf-right-2,.tab-panel.cf-hidden{opacity:0;visibility:hidden;z-index:0}
