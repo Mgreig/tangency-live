@@ -123,7 +123,7 @@ function welcomeEmailHTML() {
 <table width="100%" cellpadding="0" cellspacing="0" style="max-width:520px;background:#111827;border-radius:12px;border:1px solid #1F2937;overflow:hidden;">
 
 <tr><td style="padding:32px 32px 24px;text-align:center;border-bottom:1px solid #1F2937;">
-  <div style="font-size:24px;font-weight:700;color:#F9FAFB;letter-spacing:-0.02em;">tangency<span style="color:#3B82F6;">.</span>ai</div>
+  <img src="https://tangency.ai/apple-touch-icon.png" alt="Tangency" width="72" style="display:block;margin:0 auto;width:72px;height:auto;border:0;outline:none;text-decoration:none;">
 </td></tr>
 
 <tr><td style="padding:32px;">
@@ -134,17 +134,6 @@ function welcomeEmailHTML() {
   <p style="margin:0 0 20px;font-size:15px;line-height:1.7;color:#9CA3AF;">
     When your spot opens, you'll get an email with your invite link and founding member pricing details.
   </p>
-
-  <div style="background:rgba(59,130,246,0.06);border:1px solid rgba(59,130,246,0.15);border-radius:8px;padding:20px;margin:24px 0;">
-    <div style="font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#3B82F6;margin-bottom:12px;">What you'll get access to</div>
-    <table cellpadding="0" cellspacing="0" width="100%">
-      <tr><td style="padding:4px 0;font-size:14px;color:#D1D5DB;">&#8226; AI-curated signals across 40+ tickers</td></tr>
-      <tr><td style="padding:4px 0;font-size:14px;color:#D1D5DB;">&#8226; 10 timeframes scanned every 30 seconds</td></tr>
-      <tr><td style="padding:4px 0;font-size:14px;color:#D1D5DB;">&#8226; Every score decomposed and explained</td></tr>
-      <tr><td style="padding:4px 0;font-size:14px;color:#D1D5DB;">&#8226; 200+ data points per ticker</td></tr>
-      <tr><td style="padding:4px 0;font-size:14px;color:#D1D5DB;">&#8226; 10+ independent analysis sources</td></tr>
-    </table>
-  </div>
 
   <p style="margin:0;font-size:13px;line-height:1.6;color:#6B7280;">
     In the meantime, follow us on <a href="https://x.com/tangency_ai" style="color:#3B82F6;text-decoration:none;">X/Twitter</a> for updates.
