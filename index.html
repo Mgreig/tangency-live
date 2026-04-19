@@ -188,7 +188,7 @@ a{text-decoration:none;color:inherit}
 .narrative-beat h2{font-family:var(--font-display);font-weight:800;font-size:clamp(2.5rem,6vw,4.5rem);line-height:1.05;margin-bottom:1rem;max-width:720px;text-wrap:balance}
 .narrative-beat h2 .italic-dim{font-style:italic;color:var(--blue);font-weight:700}
 .narrative-beat h2 .blue{color:var(--blue)}
-.narrative-beat .beat-body{font-size:clamp(1rem,1.75vw,1.1875rem);color:var(--text-secondary);max-width:580px;line-height:1.65;margin-bottom:2rem;text-wrap:balance}
+.narrative-beat .beat-body{font-family:var(--font-display);font-size:clamp(1.25rem,2vw,1.625rem);color:var(--text-primary);font-weight:600;max-width:640px;line-height:1.4;margin-bottom:2rem;text-wrap:balance}
 .narrative-beat .beat-body strong{color:var(--text-primary)}
 .narrative-beat .beat-closer{font-size:1rem;color:var(--text-muted);max-width:520px;line-height:1.6;text-wrap:balance}
 
@@ -199,8 +199,8 @@ a{text-decoration:none;color:inherit}
 .ind-pill .ind-arrow.up{color:var(--emerald)}
 .ind-pill .ind-arrow.down{color:var(--red)}
 .ind-pill .ind-arrow.flat{color:var(--text-muted)}
-@media(orientation:portrait){.hero{min-height:auto;padding-bottom:2rem}.narrative-beat{min-height:auto;padding:clamp(2.5rem,6vw,4rem) 1.5rem}.features-section,.methodology-section,.pricing-section{padding:clamp(3rem,5vw,5rem) 0}}
-@media(max-width:480px){.indicator-grid{grid-template-columns:repeat(2,1fr)}.narrative-beat{padding:3rem 1.25rem}}
+@media(orientation:portrait){.hero{min-height:auto;padding-bottom:3rem}.narrative-beat{min-height:auto;padding:clamp(3.5rem,8vw,6rem) 1.5rem}.features-section,.methodology-section,.pricing-section{padding:clamp(3.5rem,6vw,6rem) 0}.founder-section{padding:clamp(3rem,5vw,4.5rem) 0 !important}.final-cta{padding:clamp(3.5rem,6vw,5.5rem) 0}}
+@media(max-width:480px){.indicator-grid{grid-template-columns:repeat(2,1fr)}.narrative-beat{padding:clamp(3rem,7vw,5rem) 1.25rem}}
 
 /* Noise visualization — layered colored lines */
 .noise-viz{width:min(700px,90%);height:60px;position:relative;margin:0 auto 3rem;overflow:hidden}
@@ -338,6 +338,7 @@ a{text-decoration:none;color:inherit}
 .tab-panel.cf-right-1{transform:translate(8%,0) scale(0.82) rotateY(-6deg);opacity:0.5;z-index:5;filter:brightness(0.55);pointer-events:none}
 .tab-panel.cf-right-2{transform:translate(48%,0) scale(0.68) rotateY(-10deg);opacity:0.25;z-index:2;filter:brightness(0.35);pointer-events:none}
 .tab-panel.cf-hidden{transform:translate(-50%,0) scale(0.5) rotateY(0);opacity:0;z-index:0;pointer-events:none;filter:brightness(0.2)}
+.tab-caption{text-align:center;font-size:clamp(0.875rem,1.25vw,1rem);color:var(--text-secondary);line-height:1.65;max-width:600px;margin:1rem auto 0;padding:0 1rem;text-wrap:balance}
 .tab-content{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-xl);overflow:hidden;overflow-y:auto;height:820px;pointer-events:none;user-select:none;-webkit-user-select:none}
 
 /* Mobile: simple crossfade instead of 3D coverflow */
@@ -925,8 +926,7 @@ a{text-decoration:none;color:inherit}
       <!-- <a href="#platform">Platform</a> -->
       <!-- <a href="#methodology">Scoring</a> -->
       <!-- <a href="#pricing">Pricing</a> removed for pre-launch -->
-      <a href="https://app.tangency.ai" class="nav-link" style="color:var(--text-secondary)">Login</a>
-      <a href="#access" class="nav-cta">Sign Up</a>
+      <a href="#access" class="nav-cta">Request Access</a>
     </div>
     <button class="nav-mobile-toggle" id="mobileToggle" aria-label="Toggle navigation">
       <span></span><span></span><span></span>
@@ -945,7 +945,7 @@ a{text-decoration:none;color:inherit}
 <canvas id="arc-canvas"></canvas>
   <div class="hero-gradient" aria-hidden="true"></div>
   <div class="hero-content">
-    <p class="hero-label">Algorithmic Intelligence</p>
+    <p class="hero-label">Algorithmic Trading Intelligence</p>
     <h1 class="hero-headline" id="ab-headline">
       <span class="line1" id="ab-line1">Where AI and Algorithms</span>
       <span class="line2" id="ab-line2">Converge.</span>
@@ -1041,9 +1041,9 @@ a{text-decoration:none;color:inherit}
 <section class="features-section" id="platform">
   <div class="container-wide">
     <div class="section-header reveal">
-      <h2>The Platform</h2>
-      <p>Every tool for active conviction. One dashboard.</p>
-      <p style="font-family:var(--font-mono);font-size:0.8125rem;color:var(--text-muted);margin-top:0.5rem">Scan. Score. Act. Across any holding period.</p>
+      <h2>Every Tool for Active Conviction.</h2>
+      <p>One dashboard. Every holding period.</p>
+      <p style="font-family:var(--font-mono);font-size:0.8125rem;color:var(--text-muted);margin-top:0.5rem">Scan. Score. Act. &mdash; across any holding period.</p>
     </div>
     <div class="reveal">
       <div class="tabs-nav" role="tablist" aria-label="Platform features">
@@ -1051,7 +1051,7 @@ a{text-decoration:none;color:inherit}
         <button class="tab-btn" role="tab" aria-selected="false" data-tab="confluence">Confluence Engine</button>
         <button class="tab-btn" role="tab" aria-selected="false" data-tab="rankings">Rankings</button>
         <button class="tab-btn" role="tab" aria-selected="false" data-tab="model">Market Intelligence</button>
-        <button class="tab-btn" role="tab" aria-selected="false" data-tab="radar">Volatility Radar</button>
+        <button class="tab-btn" role="tab" aria-selected="false" data-tab="radar">Catalyst Radar</button>
         <button class="tab-btn" role="tab" aria-selected="false" data-tab="earnings">Earnings & Reports</button>
         <button class="tab-btn" role="tab" aria-selected="false" data-tab="analyst">Analyst Ratings</button>
       </div>
@@ -1065,6 +1065,7 @@ a{text-decoration:none;color:inherit}
           <div class="tab-content">
             <div class="pulse-cards" id="pulseCards"></div>
           </div>
+          <p class="tab-caption">Real-time scoring across every ticker. See who's surging, fading, or flashing a signal change — as the move develops, not after it resolves.</p>
         </div>
 
         <!-- TAB 2: Confluence Engine -->
@@ -1072,11 +1073,12 @@ a{text-decoration:none;color:inherit}
           <div class="tab-content">
             <div class="confluence-panel" id="confluencePanel"></div>
           </div>
+          <p class="tab-caption">Multi-timeframe convergence at a glance. When the 1-hour, daily, and weekly signals align, the probability shifts in your favor.</p>
         </div>
 
         <!-- TAB 3: Rankings -->
         <div class="tab-panel" id="panel-rankings" role="tabpanel">
-          <div class="tab-content">
+          <div class="tab-content tab-content-rankings">
             <div class="rankings-toolbar">
               <button class="tool-btn">Sort by Score ▼</button>
               <button class="tool-btn heatmap-toggle" id="heatmapToggle">☷ Heatmap</button>
@@ -1094,6 +1096,7 @@ a{text-decoration:none;color:inherit}
               </table>
             </div>
           </div>
+          <p class="tab-caption">Every ticker ranked by composite score. Sort by conviction, momentum, or risk/reward — know where the strongest setups are right now.</p>
         </div>
 
         <!-- TAB 4: Market Intelligence -->
@@ -1101,27 +1104,31 @@ a{text-decoration:none;color:inherit}
           <div class="tab-content">
             <div class="market-model" id="marketModel"></div>
           </div>
+          <p class="tab-caption">Macro context in one view. Fed policy signals, sector rotation, and market regime data so you never trade in a vacuum.</p>
         </div>
 
-        <!-- TAB 5: Volatility Radar -->
+        <!-- TAB 5: Catalyst Radar -->
         <div class="tab-panel" id="panel-radar" role="tabpanel">
           <div class="tab-content">
             <div class="radar-panel" id="radarPanel"></div>
           </div>
+          <p class="tab-caption">Know what's coming — today, this week, and the next 30 days. Earnings reports, product launches, and macro events all mapped so you never get caught off guard.</p>
         </div>
 
-        <!-- TAB 5: Earnings & Reports -->
+        <!-- TAB 6: Earnings & Reports -->
         <div class="tab-panel" id="panel-earnings" role="tabpanel">
           <div class="tab-content">
             <div class="earnings-grid" id="earningsGrid"></div>
           </div>
+          <p class="tab-caption">Earnings dates, surprise history, and post-report scoring. Know what's expected and how price has historically moved post-earnings.</p>
         </div>
 
-        <!-- TAB 6: Analyst Ratings -->
+        <!-- TAB 7: Analyst Ratings -->
         <div class="tab-panel" id="panel-analyst" role="tabpanel">
           <div class="tab-content">
             <div class="analyst-panel" id="analystPanel"></div>
           </div>
+          <p class="tab-caption">Wall Street consensus mapped alongside the algo score. Spot where institutional targets and algorithmic signals diverge — and decide for yourself what to weigh.</p>
         </div>
 
       </div>
@@ -1158,26 +1165,63 @@ a{text-decoration:none;color:inherit}
   </div>
 </section>
 
+<!-- PRICING SECTION: parked in components/pricing-section.html
+     Re-enable post-launch once access restrictions are lifted -->
+
 <!-- ============================================================
-     8. PRICING (commented out for pre-launch — restore post-launch)
-     ============================================================
-<section class="pricing-section" id="pricing">
-  <div class="container">
-    <div class="section-header reveal">
-      <h2>Start Free. Upgrade When Ready.</h2>
-    </div>
-    <div class="pricing-grid reveal" id="pricingGrid"></div>
+     8b. FOUNDER CREDIBILITY
+     ============================================================ -->
+<section class="founder-section" style="padding:clamp(3rem,6vw,5rem) 0;border-top:1px solid var(--border)">
+  <div class="container reveal" style="max-width:720px;text-align:center">
+    <p class="beat-label">Built By a Trader</p>
+    <p style="font-size:clamp(1rem,1.5vw,1.125rem);color:var(--text-secondary);line-height:1.8;margin:1.5rem auto;max-width:600px;text-wrap:balance">
+      Tangency was built by a 7-figure swing trader who got tired of cross-referencing 14 indicators across 10 browser tabs. The core methodology — Ichimoku confluence, Fibonacci alignment, multi-timeframe momentum divergence — was refined over 5 years of live trading before a single line of code was written. What started as a private edge is now systematized, AI-powered, and explained in plain language.
+    </p>
+    <p style="font-family:var(--font-mono);font-size:0.75rem;color:var(--text-muted);letter-spacing:0.1em;text-transform:uppercase">
+      Not a black box. Every score decomposed. Every signal sourced.
+    </p>
   </div>
 </section>
--->
+
+<!-- ============================================================
+     8c. SIGNAL EXAMPLE
+     ============================================================ -->
+<section style="padding:clamp(2rem,4vw,3rem) 0">
+  <div class="container reveal">
+    <div class="signal-example" style="max-width:640px;margin:0 auto;background:rgba(17,24,39,0.6);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.5rem;font-family:var(--font-mono)">
+      <div style="display:flex;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:0.5rem">
+        <span style="font-size:0.75rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.1em">Illustrative Signal Example</span>
+        <span style="font-size:0.75rem;color:var(--text-muted)">Historical — not financial advice</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-bottom:1rem">
+        <div>
+          <div style="font-size:0.6875rem;color:var(--text-muted);margin-bottom:0.25rem">TICKER</div>
+          <div style="font-size:1.125rem;color:var(--text-primary);font-weight:700">NVDA</div>
+        </div>
+        <div>
+          <div style="font-size:0.6875rem;color:var(--text-muted);margin-bottom:0.25rem">SCORE</div>
+          <div style="font-size:1.125rem;color:var(--emerald);font-weight:700">87 / 100</div>
+        </div>
+        <div>
+          <div style="font-size:0.6875rem;color:var(--text-muted);margin-bottom:0.25rem">CONFLUENCE</div>
+          <div style="font-size:1.125rem;color:var(--blue);font-weight:700">9 / 10</div>
+        </div>
+      </div>
+      <div style="font-size:0.8125rem;color:var(--text-secondary);line-height:1.6;border-top:1px solid var(--border);padding-top:1rem;font-family:var(--font-body)">
+        4H + Daily Ichimoku clouds aligned at $118 support. Fibonacci 0.618 retracement from the prior impulse landed at the same level. RSI divergence on the 1H confirmed accumulation. Score flagged <span style="color:var(--emerald)">Major Confluence</span> across 6 of 10 timeframes.
+      </div>
+    </div>
+    <p style="text-align:center;font-size:0.75rem;color:var(--text-muted);margin-top:0.75rem">Past signals shown for illustrative purposes only. Not financial advice.</p>
+  </div>
+</section>
 
 <!-- ============================================================
      9. FINAL CTA — Email Capture
      ============================================================ -->
 <section class="final-cta" id="access">
   <div class="container reveal">
-    <h2>Get early access.</h2>
-    <p class="cta-sub">Create your free account. Start scanning in under 60 seconds.</p>
+    <h2>Claim your founding spot.</h2>
+    <p class="cta-sub">No credit card required. Invite sent within 24 hours.</p>
     <div class="email-capture">
       <form class="email-form" id="bottomEmailForm" autocomplete="on">
         <input type="email" name="email" placeholder="you@email.com" required aria-label="Email address" />
@@ -1229,12 +1273,12 @@ a{text-decoration:none;color:inherit}
     A: {
       line1: 'Where AI and Algorithms',
       line2: 'Converge.',
-      sub: 'Fewer blind spots. Sharper conviction. Better-timed exits.'
+      sub: 'Multi-timeframe signals. Every score explained.'
     },
     B: {
       line1: 'Where AI and Algorithms',
       line2: 'Converge.',
-      sub: 'The difference between conviction and hope is information.'
+      sub: 'Multi-timeframe signals. Every score explained.'
     }
   };
 
