@@ -1,7 +1,9 @@
 // Cloudflare Pages Function — handles email signup
 // POST /api/signup { email: "..." }
-// 1) Sends welcome email via Resend
-// 2) Logs signup to Google Sheet via Apps Script webhook
+// 1) Creates a Clerk waitlist entry (source of truth — must succeed)
+// 2) Sends welcome email via Resend
+// 3) Logs signup to Google Sheet via Apps Script webhook (DEPRECATED safety net;
+//    remove after existing entries are migrated to Clerk)
 
 const ALLOWED_ORIGINS = [
   'https://tangency.ai',
@@ -48,13 +50,46 @@ export async function onRequestPost(context) {
       });
     }
 
+    const CLERK_SECRET_KEY = context.env.CLERK_SECRET_KEY;
     const RESEND_API_KEY = context.env.RESEND_API_KEY;
     const SHEET_WEBHOOK = context.env.SHEET_WEBHOOK;
 
-    // Fire both requests in parallel
+    // 1. Clerk waitlist — source of truth. Must succeed (or already exist)
+    //    before we confirm to the user.
+    if (!CLERK_SECRET_KEY) {
+      console.error('CLERK_SECRET_KEY not configured');
+      return new Response(JSON.stringify({ error: 'Signup temporarily unavailable' }), {
+        status: 503, headers,
+      });
+    }
+
+    const clerkRes = await fetch('https://api.clerk.com/v1/waitlist_entries', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${CLERK_SECRET_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email_address: email, notify: true }),
+    });
+
+    if (!clerkRes.ok) {
+      const errText = await clerkRes.text();
+      // Clerk returns 422 with a `duplicate_record` / already-exists code when
+      // the email is already on the waitlist. Treat that as success so users
+      // who re-submit don't see an error.
+      const isDuplicate = clerkRes.status === 422 && /duplicate|already/i.test(errText);
+      if (!isDuplicate) {
+        console.error('Clerk waitlist error:', clerkRes.status, errText);
+        return new Response(JSON.stringify({ error: 'Could not add to waitlist' }), {
+          status: 502, headers,
+        });
+      }
+    }
+
+    // 2 + 3. Welcome email + legacy sheet log, in parallel. Non-blocking —
+    //        the Clerk entry is already persisted at this point.
     const promises = [];
 
-    // 1. Welcome email via Resend
     if (RESEND_API_KEY) {
       promises.push(
         fetch('https://api.resend.com/emails', {
@@ -73,7 +108,8 @@ export async function onRequestPost(context) {
       );
     }
 
-    // 2. Log to Google Sheet via Apps Script
+    // DEPRECATED: Google Sheet is no longer the system of record. Kept as a
+    // safety net until existing entries are migrated to Clerk, then remove.
     if (SHEET_WEBHOOK) {
       promises.push(
         fetch(SHEET_WEBHOOK, {
