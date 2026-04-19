@@ -102,7 +102,7 @@ a{text-decoration:none;color:inherit}
 /* ================================================================
    2. HERO SECTION
    ================================================================ */
-.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;overflow:hidden;padding-top:64px;z-index:2;background:var(--bg)}
+.hero{position:relative;min-height:auto;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;overflow:hidden;padding-top:64px;padding-bottom:2rem;z-index:2;background:var(--bg)}
 #constellation-canvas{position:absolute;inset:0;z-index:0}
 #arc-canvas{position:absolute;inset:0;z-index:0;pointer-events:none}
 .starfield-wrap{position:relative;z-index:2;background:var(--bg)}
@@ -182,7 +182,7 @@ a{text-decoration:none;color:inherit}
    2b. NARRATIVE BLOCK — Problem → Noise → Confluence
    ================================================================ */
 .narrative-block{padding:0;overflow:hidden;position:relative;z-index:2;background:var(--bg)}
-.narrative-beat{min-height:80vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:clamp(4rem,10vw,8rem) 1.5rem;position:relative;z-index:1}
+.narrative-beat{min-height:auto;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:clamp(4rem,8vw,6rem) 1.5rem;position:relative;z-index:1}
 .narrative-beat .beat-label{font-family:var(--font-mono);font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-muted);margin-bottom:2rem}
 .narrative-beat .beat-label.blue{color:var(--blue)}
 .narrative-beat h2{font-family:var(--font-display);font-weight:800;font-size:clamp(2.5rem,6vw,4.5rem);line-height:1.05;margin-bottom:1rem;max-width:720px;text-wrap:balance}
@@ -199,7 +199,7 @@ a{text-decoration:none;color:inherit}
 .ind-pill .ind-arrow.up{color:var(--emerald)}
 .ind-pill .ind-arrow.down{color:var(--red)}
 .ind-pill .ind-arrow.flat{color:var(--text-muted)}
-@media(max-width:768px){.hero{min-height:auto;padding-bottom:2rem}.narrative-beat{min-height:auto;padding:clamp(2.5rem,6vw,4rem) 1.5rem}}
+@media(max-width:768px){.narrative-beat{padding:clamp(2.5rem,6vw,4rem) 1.5rem}}
 @media(max-width:480px){.indicator-grid{grid-template-columns:repeat(2,1fr)}.narrative-beat{min-height:auto;padding:3rem 1.25rem}}
 
 /* Noise visualization — layered colored lines */
@@ -317,7 +317,7 @@ a{text-decoration:none;color:inherit}
 /* ================================================================
    5. FEATURE SHOWCASE — TABS
    ================================================================ */
-.features-section{padding:clamp(4rem,8vw,8rem) 0;background:var(--bg);position:relative;z-index:2}
+.features-section{padding:clamp(3rem,5vw,5rem) 0;background:var(--bg);position:relative;z-index:2}
 .section-header{text-align:center;margin-bottom:3rem}
 .section-header h2{font-family:var(--font-display);font-weight:700;font-size:clamp(2rem,4vw,3rem);margin-bottom:0.75rem}
 .section-header p{color:var(--text-secondary);max-width:560px;margin:0 auto;font-size:1rem}
@@ -524,7 +524,7 @@ a{text-decoration:none;color:inherit}
 /* ================================================================
    6. SCORING METHODOLOGY
    ================================================================ */
-.methodology-section{padding:clamp(4rem,8vw,8rem) 0;background:transparent;position:relative;overflow:visible;z-index:1}
+.methodology-section{padding:clamp(3rem,5vw,5rem) 0;background:transparent;position:relative;overflow:visible;z-index:1}
 .methodology-section::before{content:'';position:absolute;inset:0;background:#0D1525;z-index:-1}
 #strand-canvas{position:fixed;top:0;left:0;right:0;height:100vh;z-index:0;pointer-events:none;opacity:0.24;display:none}
 .methodology-section~*{position:relative;z-index:2;background:var(--bg)}
@@ -587,7 +587,7 @@ a{text-decoration:none;color:inherit}
 /* ================================================================
    8. PRICING
    ================================================================ */
-.pricing-section{contain:layout style paint;padding:clamp(4rem,8vw,8rem) 0}
+.pricing-section{contain:layout style paint;padding:clamp(3rem,5vw,5rem) 0}
 .pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;max-width:960px;margin:0 auto}
 .price-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-xl);padding:2rem 1.5rem;display:flex;flex-direction:column;transition:all 0.3s}
 .price-card:hover{border-color:rgba(59,130,246,0.2);transform:translateY(-2px)}
