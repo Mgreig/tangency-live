@@ -199,7 +199,8 @@ a{text-decoration:none;color:inherit}
 .ind-pill .ind-arrow.up{color:var(--emerald)}
 .ind-pill .ind-arrow.down{color:var(--red)}
 .ind-pill .ind-arrow.flat{color:var(--text-muted)}
-@media(max-width:480px){.indicator-grid{grid-template-columns:repeat(2,1fr)}.narrative-beat{min-height:60vh;padding:3rem 1.25rem}}
+@media(max-width:768px){.hero{min-height:auto;padding-bottom:2rem}.narrative-beat{min-height:auto;padding:clamp(2.5rem,6vw,4rem) 1.5rem}}
+@media(max-width:480px){.indicator-grid{grid-template-columns:repeat(2,1fr)}.narrative-beat{min-height:auto;padding:3rem 1.25rem}}
 
 /* Noise visualization — layered colored lines */
 .noise-viz{width:min(700px,90%);height:60px;position:relative;margin:0 auto 3rem;overflow:hidden}
