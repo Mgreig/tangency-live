@@ -25,6 +25,8 @@
 <meta name="twitter:description" content="Multi-timeframe signals. Every score explained. AI-powered algorithmic scoring across 40+ tickers and 10 timeframes.">
 <meta name="twitter:image" content="https://tangency.ai/og-image.png">
 <meta name="twitter:image:alt" content="Tangency — AI-Powered Trading Intelligence">
+<script defer data-domain="tangency.ai" src="https://plausible.io/js/script.js"></script>
+<script>window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="icon" type="image/jpeg" sizes="32x32" href="/favicon-32.jpg">
 <link rel="icon" type="image/jpeg" sizes="16x16" href="/favicon-16.jpg">
@@ -1226,12 +1228,12 @@ a{text-decoration:none;color:inherit}
     A: {
       line1: 'Where AI and Algorithms',
       line2: 'Converge.',
-      sub: 'Multi-timeframe signals. Every score explained.'
+      sub: 'Fewer blind spots. Sharper conviction. Better-timed exits.'
     },
     B: {
       line1: 'Where AI and Algorithms',
       line2: 'Converge.',
-      sub: 'Multi-timeframe signals. Every score explained.'
+      sub: 'The difference between conviction and hope is information.'
     }
   };
 
@@ -1264,19 +1266,29 @@ a{text-decoration:none;color:inherit}
   // Log to console for debugging
   console.log('[Tangency A/B] Variant:', assigned, '|', v.line1, v.line2);
 
-  // Track impression (fires once per page load)
-  // Integration point: replace with your analytics call
-  // e.g., gtag('event', 'ab_impression', { variant: assigned });
+  // Store variant globally for event tracking
   window.__tangency_ab = { variant: assigned, timestamp: Date.now() };
 
-  // Track CTA clicks with variant attribution
-  document.querySelectorAll('.btn-primary').forEach(btn => {
-    btn.addEventListener('click', function() {
-      console.log('[Tangency A/B] CTA click | Variant:', assigned);
-      // Integration point: replace with your analytics call
-      // e.g., gtag('event', 'ab_cta_click', { variant: assigned });
-    });
-  });
+  // Track impression via Plausible custom event
+  if (window.plausible) {
+    window.plausible('AB Impression', { props: { variant: assigned, subheader: v.sub } });
+  }
+
+  // Track scroll to #access section
+  var accessSection = document.getElementById('access');
+  var accessTracked = false;
+  if (accessSection) {
+    var accessObs = new IntersectionObserver(function(entries) {
+      if (entries[0].isIntersecting && !accessTracked) {
+        accessTracked = true;
+        console.log('[Tangency A/B] Scroll to #access | Variant:', assigned);
+        if (window.plausible) {
+          window.plausible('Scroll to Access', { props: { variant: assigned } });
+        }
+      }
+    }, { threshold: 0.3 });
+    accessObs.observe(accessSection);
+  }
   } catch(e) { console.warn('[Tangency A/B] Failed gracefully:', e.message); }
 })();
 
@@ -3970,6 +3982,11 @@ function setupEmailForm(formId, successId) {
       if (founding) founding.style.display = 'none';
       var fine = form.parentElement.querySelector('.hero-email-fine');
       if (fine) fine.style.display = 'none';
+      // Track signup conversion with A/B variant
+      var ab = window.__tangency_ab || {};
+      if (window.plausible) {
+        window.plausible('Email Signup', { props: { variant: ab.variant || 'unknown', form: formId } });
+      }
     })
     .catch(function() {
       btn.disabled = false;
